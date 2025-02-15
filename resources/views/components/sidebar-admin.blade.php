@@ -1,7 +1,6 @@
 <div class="h-screen w-64 bg-indigo-600 text-white flex flex-col">
     <div class="flex items-center justify-center h-16 border-b border-indigo-500">
-        <i class="fa-solid fa-backward"></i>
-        <h1 class="ms-4 font-bold">ADMIN</h1>
+        <h1 class="ms-4 font-bold text-center">WELCOME ADMIN</h1>
     </div>
     
     <nav class="flex-1 px-4 py-4">
@@ -28,14 +27,14 @@
 
         <a href="{{ route('admin.maskapai') }}" 
            class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
-           {{ request()->is('admin.maskapai') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+           {{ request()->is('maskapai') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
            <i class="fa-solid fa-plane"></i>
            <span>Maskapai</span>
         </a>
 
         <a href="{{ route('admin.master-kota') }}" 
            class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
-           {{ request()->is('admin.master-kota') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+           {{ request()->is('master-kota') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
            <i class="fa-solid fa-location-dot"></i>
             <span>Master Kota</span>
         </a>

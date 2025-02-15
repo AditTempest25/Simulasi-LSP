@@ -17,53 +17,16 @@
         <!-- Sidebar -->
         <x-sidebar-admin></x-sidebar-admin>
 
-        <!-- Section utama -->
-        {{-- <div class="flex-1 p-6 bg-white rounded-lg shadow-md m-4">
-            <h1 class="text-2xl font-semibold text-gray-800 mb-4">Dashboard</h1>
-
-            <div class="grid grid-cols-3 gap-4">
-                <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
-                    <i class="fa-solid fa-users"></i>
-                    <a href="#">
-                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Data
-                            Pengguna</span>
-                        <div class="flex items-center justify-between">
-                            <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">200</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
-                    <i class="fa-solid fa-user-tie"></i>
-                    <a href="#">
-                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Data
-                            Petugas</span>
-                        <div class="flex items-center justify-between">
-                            <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">100</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
-                    <i class="fa-solid fa-train"></i>
-                    <a href="#">
-                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
-                            Kereta </span>
-                    </a>
-                    <div class="flex items-center justify-between">
-                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">50</span>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
         <!-- Main Content -->
         <main class="flex-1 p-6">
-            
+
             <!-- Header -->
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-blue-800">Welcome Admin</h2>
                 <div class="flex items-center space-x-4">
                     <input type="text" placeholder="Search..." class="px-3 py-2 border rounded-lg">
-                    <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white"><i class="fa-solid fa-user"></i></div>
+                    <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white"><i
+                            class="fa-solid fa-user"></i></div>
                 </div>
             </div>
 
@@ -81,40 +44,46 @@
                     <h3 class="text-xl text-blue-700 font-semibold">Pendapatan</h3>
                     <p class="text-3xl font-bold mt-2">Rp 45.000.000</p>
                 </div>
+                <!-- Total Pesawat Aktif -->
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
                     <i class="fa-solid fa-plane"></i>
-                    <a href="#">
-                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total
-                            Pesawat Aktif</span>
+                    <a href="{{ route('admin.maskapai') }}">
+                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Pesawat
+                            Aktif</span>
                     </a>
                     <div class="flex items-center justify-between">
-                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">50</span>
+                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalPesawat }}</span>
                     </div>
                 </div>
+
+                <!-- Data Pengguna -->
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
                     <i class="fa-solid fa-users"></i>
-                    <a href="#">
+                    <a href="{{ route('admin.data-pengguna') }}">
                         <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Data
                             Pengguna</span>
-                        <div class="flex items-center justify-between">
-                            <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">200</span>
-                        </div>
                     </a>
+                    <div class="flex items-center justify-between">
+                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalPengguna }}</span>
+                    </div>
                 </div>
+
+                <!-- Data Petugas -->
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
                     <i class="fa-solid fa-user-tie"></i>
-                    <a href="#">
+                    <a href="{{ route('admin.data-petugas') }}">
                         <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Data
                             Petugas</span>
-                        <div class="flex items-center justify-between">
-                            <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">100</span>
-                        </div>
                     </a>
+                    <div class="flex items-center justify-between">
+                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalPetugas }}</span>
+                    </div>
                 </div>
+
             </div>
 
             <!-- Recent Orders Table -->
-            {{-- <div class="bg-white p-6 rounded-lg shadow-md mt-6">
+            <div class="bg-white p-6 rounded-lg shadow-md mt-6">
                 <h3 class="text-xl font-bold text-blue-800 mb-4">Pemesanan Terbaru</h3>
                 <table class="w-full text-left">
                     <thead>
@@ -154,7 +123,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div> --}}
+            </div>
 
         </main>
 </body>

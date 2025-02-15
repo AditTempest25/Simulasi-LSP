@@ -22,11 +22,19 @@
             <!-- Header -->
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-blue-800">Data Petugas</h2>
-                <div class="flex items-center space-x-4">
-                    <input type="text" placeholder="Search..." class="px-3 py-2 border rounded-lg">
-                    <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white"><i
-                            class="fa-solid fa-user"></i></div>
-                </div>
+                <!-- FORM PENCARIAN -->
+                <form method="GET" action="{{ route('admin.data-petugas') }}" class="flex items-center space-x-4">
+                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Search..."
+                        class="px-3 py-2 border rounded-lg">
+                    <button type="submit" class="px-3 py-2 bg-blue-700 text-white rounded-lg">
+                        <i class="fa-solid fa-search"></i>
+                    </button>
+                    @if(request('q'))
+                        <a href="{{ route('admin.data-petugas') }}" class="px-3 py-2 bg-gray-500 text-white rounded-lg">
+                            <i class="fa-solid fa-times"></i> Reset
+                        </a>
+                    @endif
+                </form>
             </div>
 
             <div class="relative overflow-x-auto mt-12">

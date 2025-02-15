@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,20 +19,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        $user = Auth::user();
-
-        if ($user->role === 'admin') {
-            return view('admin.dashboard');
-        }
-
-        if ($user->role === 'petugas') {
-            return view('petugas.dashboard');
-        }
-
-        // Default untuk penumpang
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::group(['as' => 'admin.'], function () {

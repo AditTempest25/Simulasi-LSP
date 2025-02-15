@@ -7,9 +7,16 @@ use App\Models\MasterKota; // Import model MasterKota
 
 class MasterKotaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kota = MasterKota::all(); // Menampilkan data kota
+        $query = MasterKota::query();
+
+        // Jika ada parameter pencarian (q) dan tidak kosong
+        if ($request->has('q') && !empty($request->q)) {
+            $query->where('nama_kota', 'LIKE', '%' . $request->q . '%');
+        }
+
+        $kota = $query->get(); // Ambil data kota sesuai filter
         return view('admin.master-kota', compact('kota'));
     }
 

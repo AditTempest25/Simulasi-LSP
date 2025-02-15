@@ -7,10 +7,19 @@ use App\Models\User; // Pakai model User
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = User::where('role', 'penumpang');
+
+        // Jika ada parameter pencarian (q) dan tidak kosong
+        if ($request->has('q') && !empty($request->q)) {
+            $query->where('name', 'LIKE', '%' . $request->q . '%');
+        }
+
+        $penumpang = $query->get();
+
         // Ambil user dengan role 'pengguna'
-        $penumpang = User::where('role', 'penumpang')->get();
+        // $penumpang = User::where('role', 'penumpang')->get();
 
         return view('admin.data-pengguna', compact('penumpang'));
     }

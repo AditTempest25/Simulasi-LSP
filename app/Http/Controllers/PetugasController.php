@@ -7,10 +7,20 @@ use App\Models\User; // Pakai model User
 
 class PetugasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
+        $query = User::where('role', 'petugas');
+
+        // Jika ada parameter pencarian (q) dan tidak kosong
+        if ($request->has('q') && !empty($request->q)) {
+            $query->where('name', 'LIKE', '%' . $request->q . '%');
+        }
+
+        $petugas = $query->get();
+
         // Ambil user dengan role 'petugas'
-        $petugas = User::where('role', 'petugas')->get();
+        // $petugas = User::where('role', 'petugas')->get();
 
         return view('admin.data-petugas', compact('petugas'));
     }
