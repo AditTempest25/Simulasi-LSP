@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('rute', function (Blueprint $table) {
             $table->id('id_rute');
-            $table->unsignedBigInteger('id_maskapai');
+            $table->unsignedBigInteger(column: 'id_maskapai');
             $table->foreign('id_maskapai')->references('id_maskapai')->on('maskapai')->onDelete('cascade')->onUpdate('cascade');
-                        $table->foreignId('kota_asal')
+            $table->foreignId('kota_asal')
                 ->constrained('master_kotas', 'id')
                 ->onDelete('cascade');
             $table->foreignId('kota_tujuan')

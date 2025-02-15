@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MasterKotaController;
 use App\Http\Controllers\MaskapaiController;
+use App\Http\Controllers\RuteController;
 use \App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,6 +51,15 @@ Route::group(['as' => 'admin.'], function () {
     Route::get('/master-kota/{id}/edit', [MasterKotaController::class, 'edit'])->name('master-kota.edit');
     Route::put('/master-kota/{id}', [MasterKotaController::class, 'update'])->name('master-kota.update');
     Route::delete('/master-kota/{id}', [MasterKotaController::class, 'destroy'])->name('master-kota.destroy');
+
+    // Rute
+    Route::get('/rute', [RuteController::class, 'index'])->name('rute');
+    Route::get('/rute/create', [RuteController::class, 'create'])->name('rute.create');
+    Route::post('/rute', [RuteController::class, 'store'])->name('rute.store');
+    Route::get('/rute/edit/{id}', [RuteController::class, 'edit'])->name('rute.edit');
+    Route::put('/rute/update/{id}', [RuteController::class, 'update'])->name('rute.update');
+    Route::delete('/rute/delete/{id}', [RuteController::class, 'destroy'])->name('rute.destroy');
+
 });
 
 Route::get('/logout', function () {

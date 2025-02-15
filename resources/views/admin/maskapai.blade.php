@@ -22,19 +22,26 @@
             <!-- Header -->
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-blue-800">Maskapai</h2>
-                <div class="flex items-center space-x-4">
-                    <input type="text" placeholder="Search..." class="px-3 py-2 border rounded-lg">
-                    <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white">
-                        <i class="fa-solid fa-plane"></i>
-                    </div>
-                </div>
+                <!-- FORM PENCARIAN -->
+                <form method="GET" action="{{ route('admin.maskapai') }}" class="flex items-center space-x-4">
+                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Search..."
+                        class="px-3 py-2 border rounded-lg">
+                    <button type="submit" class="px-3 py-2 bg-blue-700 text-white rounded-lg">
+                        <i class="fa-solid fa-search"></i>
+                    </button>
+                    @if(request('q'))
+                        <a href="{{ route('admin.maskapai') }}" class="px-3 py-2 bg-gray-500 text-white rounded-lg">
+                            <i class="fa-solid fa-times"></i> Reset
+                        </a>
+                    @endif
+                </form>
             </div>
 
-            <div class="relative overflow-x-auto mt-12">
-                <div class="btn flex w-full justify-end mb-5">
+            <div class="relative overflow-x-auto mt-6">
+                <div class="mb-6">
                     <a href="{{ route('admin.maskapai.create') }}"
-                        class="px-4 py-2 bg-blue-700 rounded-md text-white hover:bg-blue-800 flex justify-end">
-                        <i class="fa-solid fa-plus mt-1 me-3"></i>Tambah Maskapai
+                        class="px-4 py-2 bg-blue-700 rounded-md text-white hover:bg-blue-800 inline-flex items-center">
+                        <i class="fa-solid fa-plus me-2"></i>Tambah Maskapai
                     </a>
                 </div>
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -55,9 +62,6 @@
                             <th scope="col" class="px-6 py-3">
                                 Status
                             </th>
-                            {{-- <th scope="col" class="px-6 py-3">
-                                Harga
-                            </th> --}}
                             <th scope="col" class="px-6 py-3">Action</th>
                         </tr>
                     </thead>

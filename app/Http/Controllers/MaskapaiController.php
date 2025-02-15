@@ -8,9 +8,15 @@ use App\Models\Maskapai;
 class MaskapaiController extends Controller
 {
     // Menampilkan daftar maskapai
-    public function index()
+    public function index(Request $request)
     {
-        $maskapai = Maskapai::all();
+        $query = Maskapai::query();
+
+        // Jika ada parameter pencarian (q) dan tidak kosong
+        if ($request->has('q') && !empty($request->q)) {
+            $query->where('nama_maskapai', 'LIKE', '%' . $request->q . '%');
+        }
+        $maskapai = $query->get(); // Ambil data kota sesuai filter
         return view('admin.maskapai', compact('maskapai'));
     }
 
@@ -44,8 +50,6 @@ class MaskapaiController extends Controller
             'kelas' => $request->kelas,
             'status' => $request->status,
         ]);
-
-        return redirect()->route('admin.maskapai')->with('success', 'Maskapai berhasil ditambahkan!');
 
         return redirect()->route('admin.maskapai')->with('success', 'Maskapai berhasil ditambahkan!');
     }

@@ -9,6 +9,8 @@ class Rute extends Model
 {
     use HasFactory;
 
+    protected $table = 'rute';
+
     protected $primaryKey = 'id_rute';
     protected $fillable = ['id_maskapai', 'kota_asal', 'kota_tujuan', 'tanggal_pergi'];
 
@@ -25,12 +27,14 @@ class Rute extends Model
     }
 
     // Relasi ke Kota untuk kota asal
-    public function kotaAsal() {
+    public function kotaAsal()
+    {
         return $this->belongsTo(MasterKota::class, 'kota_asal');
     }
 
     // Relasi ke Kota untuk kota tujuan
-    public function kotaTujuan() {
+    public function kotaTujuan()
+    {
         return $this->belongsTo(MasterKota::class, 'kota_tujuan');
     }
 }

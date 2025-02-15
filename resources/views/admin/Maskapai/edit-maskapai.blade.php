@@ -67,9 +67,10 @@
                         <i class="fa-solid fa-arrow-left me-2"></i>
                         Kembali
                     </a>
-                    
+
                     <button type="submit"
                         class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded transition duration-200">
+                        <i class="fa-solid fa-pen-nib me-2"></i>
                         Update
                     </button>
                 </div>

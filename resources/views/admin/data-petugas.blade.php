@@ -37,11 +37,11 @@
                 </form>
             </div>
 
-            <div class="relative overflow-x-auto mt-12">
-                <div class="btn flex w-full justify-end mb-5">
+            <div class="relative overflow-x-auto mt-6">
+                <div class="mb-6">
                     <a href="{{ route('admin.data-petugas.create') }}"
-                        class="px-4 py-2 bg-blue-700 rounded-md text-white hover:bg-blue-800 flex justify-end">
-                        <i class="fa-solid fa-plus mt-1 me-3"></i>Tambah Petugas
+                        class="px-4 py-2 bg-blue-700 rounded-md text-white hover:bg-blue-800 inline-flex items-center">
+                        <i class="fa-solid fa-plus me-2"></i>Tambah Petugas
                     </a>
                 </div>
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
