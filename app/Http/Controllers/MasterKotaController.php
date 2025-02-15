@@ -20,10 +20,12 @@ class MasterKotaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_kota' => 'required',
+            'nama_kota' => 'required|unique:master_kotas,nama_kota',
+        ], [
+            'nama_kota.unique' => 'Nama kota sudah ada, silakan gunakan nama lain.',
         ]);
 
-        $kota = MasterKota::create([
+        MasterKota::create([
             'nama_kota' => $request->nama_kota,
         ]);
 
@@ -39,15 +41,18 @@ class MasterKotaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_kota' => 'required',
+            'nama_kota' => 'required|unique:master_kotas,nama_kota,' . $id,
+        ], [
+            'nama_kota.unique' => 'Nama kota sudah ada, silakan gunakan nama lain.',
         ]);
 
-        $kota = MasterKota::find($id);
+        $kota = MasterKota::findOrFail($id);
         $kota->nama_kota = $request->nama_kota;
         $kota->save();
 
         return redirect()->route('admin.master-kota')->with('success', 'Kota berhasil diupdate');
     }
+
 
     public function destroy($id)
     {

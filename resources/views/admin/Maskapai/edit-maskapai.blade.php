@@ -7,6 +7,10 @@
     <title>Edit Maskapai</title>
     <!-- Sertakan Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="bg-gray-100">
@@ -58,6 +62,12 @@
 
                 <!-- Tombol Submit -->
                 <div class="text-center">
+                    <a href="{{ route('admin.maskapai') }}"
+                        class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded transition duration-200 me-4">
+                        <i class="fa-solid fa-arrow-left me-2"></i>
+                        Kembali
+                    </a>
+                    
                     <button type="submit"
                         class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded transition duration-200">
                         Update

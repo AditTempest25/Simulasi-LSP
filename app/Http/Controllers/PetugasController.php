@@ -33,6 +33,8 @@ class PetugasController extends Controller
             'tanggal_lahir' => 'required',
             'jenis_kelamin' => 'required',
             'alamat' => 'required',
+        ], [
+            'email.unique' => 'Email ini sudah digunakan, silakan gunakan email lain.',
         ]);
 
         // Set password default jika tidak diisi
