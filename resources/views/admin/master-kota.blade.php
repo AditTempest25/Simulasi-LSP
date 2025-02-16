@@ -39,7 +39,7 @@
             <div class="mb-6">
                 <a href="{{ route('admin.master-kota.create') }}"
                     class="px-4 py-2 bg-blue-700 rounded-md text-white hover:bg-blue-800 inline-flex items-center">
-                    <i class="fa-solid fa-plus me-2"></i>Tambah Petugas
+                    <i class="fa-solid fa-plus me-2"></i>Tambah Kota
                 </a>
             </div>
 

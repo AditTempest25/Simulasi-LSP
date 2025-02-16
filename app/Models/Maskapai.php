@@ -15,7 +15,7 @@ class Maskapai extends Model
     protected $primaryKey = 'id_maskapai';
     protected $fillable = ['logo_maskapai', 'nama_maskapai', 'kelas', 'status'];
 
-    // Satu kereta bisa memiliki banyak rute
+    // Satu maskapai bisa memiliki banyak rute
     public function rutes()
     {
         return $this->hasMany(Rute::class, 'id_maskapai');

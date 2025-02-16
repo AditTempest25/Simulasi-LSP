@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Maskapai;
+use App\Models\JadwalMaskapai;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -17,6 +18,7 @@ class DashboardController extends Controller
         if ($user->role === 'admin') {
             return view('admin.dashboard', [
                 'totalPesawat' => Maskapai::count(),
+                'totalJadwal' => JadwalMaskapai::count(),
                 'totalPengguna' => User::where('role', 'penumpang')->count(),
                 'totalPetugas' => User::where('role', 'petugas')->count(),
             ]);

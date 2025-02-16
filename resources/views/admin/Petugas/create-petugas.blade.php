@@ -17,6 +17,15 @@
     <div class="max-w-3xl mx-auto p-6">
         <div class="bg-white p-8 rounded shadow">
             <h2 class="text-2xl font-bold mb-6 text-center">Tambah Petugas</h2>
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{ route('admin.data-petugas.store') }}" method="POST">
                 @csrf
                 <!-- Field Nama -->
@@ -55,7 +64,7 @@
                     <input type="text" name="alamat" id="alamat" required placeholder="Alamat"
                         class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <!-- Field Gender (ubah name dari 'gender' menjadi 'jenis_kelamin') -->
+                <!-- Field Gender -->
                 <div class="mb-4">
                     <label for="jenis_kelamin" class="block text-gray-700 font-semibold mb-2">Gender:</label>
                     <select name="jenis_kelamin" id="jenis_kelamin" required

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JadwalMaskapaiController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +40,7 @@ Route::group(['as' => 'admin.'], function () {
     // ✅ Maskapai (Menggunakan Controller)
     Route::get('/maskapai', [MaskapaiController::class, 'index'])->name('maskapai');
     Route::get('/maskapai/create', [MaskapaiController::class, 'create'])->name('maskapai.create');
-    Route::post('/maskapai', [MaskapaiController::class,'store'])->name('maskapai.store');
+    Route::post('/maskapai', [MaskapaiController::class, 'store'])->name('maskapai.store');
     Route::get('/maskapai/{id}/edit', [MaskapaiController::class, 'edit'])->name('maskapai.edit');
     Route::put('/maskapai/{id}', [MaskapaiController::class, 'update'])->name('maskapai.update');
     Route::delete('/maskapai/{id}', [MaskapaiController::class, 'destroy'])->name('maskapai.destroy');
@@ -60,6 +61,13 @@ Route::group(['as' => 'admin.'], function () {
     Route::put('/rute/update/{id}', [RuteController::class, 'update'])->name('rute.update');
     Route::delete('/rute/delete/{id}', [RuteController::class, 'destroy'])->name('rute.destroy');
 
+    // Jadwal Penerbangan
+    Route::get('/jadwal-maskapai', [JadwalMaskapaiController::class, 'index'])->name('jadwal-maskapai');
+    Route::get('/jadwal-maskapai/create', [JadwalMaskapaiController::class, 'create'])->name('jadwal-maskapai.create');
+    Route::post('/jadwal-maskapai', [JadwalMaskapaiController::class, 'store'])->name('jadwal-maskapai.store');
+    Route::get('/jadwal-maskapai/{id}/edit', [JadwalMaskapaiController::class, 'edit'])->name('jadwal-maskapai.edit');
+    Route::put('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'update'])->name('jadwal-maskapai.update')->where('jadwal', '[0-9]+');
+    Route::delete('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'destroy'])->name('jadwal-maskapai.destroy');
 });
 
 Route::get('/logout', function () {

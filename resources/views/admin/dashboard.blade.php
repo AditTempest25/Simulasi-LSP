@@ -22,7 +22,7 @@
 
             <!-- Header -->
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-3xl font-bold text-blue-800">Welcome Admin</h2>
+                <h2 class="text-3xl font-bold text-blue-800">Selamat Datang, {{ Auth::user()->name }}</h2>
                 <div class="flex items-center space-x-4">
                     <input type="text" placeholder="Search..." class="px-3 py-2 border rounded-lg">
                     <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white"><i
@@ -36,9 +36,15 @@
                     <h3 class="text-xl text-blue-700 font-semibold">Total Pemesanan</h3>
                     <p class="text-3xl font-bold mt-2">12,340</p>
                 </div>
-                <div class="bg-white p-5 rounded-lg shadow-md">
-                    <h3 class="text-xl text-blue-700 font-semibold">Tiket Tersedia</h3>
-                    <p class="text-3xl font-bold mt-2">7,520</p>
+                <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
+                    <a href="{{ route('admin.jadwal-maskapai') }}">
+                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Jadwal
+                            Penerbangan</span>
+                    </a>
+                    <i class="fa-solid fa-calendar"></i>
+                    <div class="flex items-center justify-between">
+                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalJadwal }}</span>
+                    </div>
                 </div>
                 <div class="bg-white p-5 rounded-lg shadow-md">
                     <h3 class="text-xl text-blue-700 font-semibold">Pendapatan</h3>
@@ -46,23 +52,22 @@
                 </div>
                 <!-- Total Pesawat Aktif -->
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
-                    <i class="fa-solid fa-plane"></i>
                     <a href="{{ route('admin.maskapai') }}">
                         <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Pesawat
                             Aktif</span>
-                    </a>
-                    <div class="flex items-center justify-between">
+                        </a>
+                        <i class="fa-solid fa-plane-up"></i>                    <div class="flex items-center justify-between">
                         <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalPesawat }}</span>
                     </div>
                 </div>
 
                 <!-- Data Pengguna -->
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
-                    <i class="fa-solid fa-users"></i>
                     <a href="{{ route('admin.data-pengguna') }}">
                         <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Data
                             Pengguna</span>
-                    </a>
+                        </a>
+                        <i class="fa-solid fa-users"></i>
                     <div class="flex items-center justify-between">
                         <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalPengguna }}</span>
                     </div>
@@ -70,11 +75,11 @@
 
                 <!-- Data Petugas -->
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
-                    <i class="fa-solid fa-user-tie"></i>
                     <a href="{{ route('admin.data-petugas') }}">
                         <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Data
                             Petugas</span>
-                    </a>
+                        </a>
+                        <i class="fa-solid fa-user-tie"></i>
                     <div class="flex items-center justify-between">
                         <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalPetugas }}</span>
                     </div>

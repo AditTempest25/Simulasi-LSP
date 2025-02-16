@@ -11,7 +11,7 @@ class RuteController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Rute::with(['kereta', 'kotaAsal', 'kotaTujuan']);
+        $query = Rute::with(['maskapai', 'kotaAsal', 'kotaTujuan']);
 
         if ($request->has('q') && !empty($request->q)) {
             $query->whereHas('kotaAsal', function ($q) use ($request) {
@@ -38,8 +38,9 @@ class RuteController extends Controller
             'id_maskapai' => 'required|exists:maskapai,id_maskapai',
             'kota_asal' => 'required|exists:master_kotas,id',
             'kota_tujuan' => 'required|exists:master_kotas,id|different:kota_asal',
-            'tanggal_pergi' => 'required|date',
+            'tanggal_pergi' => 'required|date|after_or_equal:today',
         ], [
+            'tanggal_pergi.after_or_equal' => 'Tanggal keberangkatan tidak bisa diisi dengan tanggal yang sudah lewat.',
             'kota_tujuan.different' => 'Kota tujuan tidak boleh sama dengan kota asal.',
         ]);
  
@@ -69,8 +70,9 @@ class RuteController extends Controller
             'id_maskapai' => 'required|exists:maskapai,id_maskapai',
             'kota_asal' => 'required|exists:master_kotas,id',
             'kota_tujuan' => 'required|exists:master_kotas,id|different:kota_asal',
-            'tanggal_pergi' => 'required|date',
+            'tanggal_pergi' => 'required|date|after_or_equal:today',
         ], [
+            'tanggal_pergi.after_or_equal' => 'Tanggal keberangkatan tidak bisa diisi dengan tanggal yang sudah lewat.',
             'kota_tujuan.different' => 'Kota tujuan tidak boleh sama dengan kota asal.',
         ]);
 

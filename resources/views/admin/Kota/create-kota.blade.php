@@ -17,6 +17,15 @@
     <div class="max-w-3xl mx-auto p-6">
         <div class="bg-white p-8 rounded shadow">
             <h2 class="text-2xl font-bold mb-6 text-center">Tambah Kota</h2>
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{ route('admin.master-kota.store') }}" method="POST">
                 @csrf
                 <!-- Field Nama -->

@@ -1,6 +1,7 @@
 <div class="h-screen w-64 bg-indigo-600 text-white flex flex-col">
     <div class="flex items-center justify-center h-16 border-b border-indigo-500">
-        <h1 class="ms-4 font-bold text-center">WELCOME ADMIN</h1>
+        <i class="fa-solid fa-user-secret"></i>
+        <h1 class="ms-4 font-bold text-center">HALAMAN ADMIN</h1>
     </div>
 
     <nav class="flex-1 px-4 py-4">
@@ -44,6 +45,12 @@
             {{ request()->is('rute') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
             <i class="fa-solid fa-map-location-dot"></i>
             <span>Rute</span>
+        </a>
+
+        <a href="{{ route('admin.jadwal-maskapai') }}"
+            class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
+            {{ request()->is('jadwal-maskapai') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+            <i class="fa-solid fa-calendar"></i> <span>Jadwal Penerbangan</span>
         </a>
 
     </nav>

@@ -15,13 +15,13 @@ class Rute extends Model
     protected $fillable = ['id_maskapai', 'kota_asal', 'kota_tujuan', 'tanggal_pergi'];
 
     // Setiap rute dimiliki oleh satu maskapai
-    public function kereta()
+    public function maskapai()
     {
         return $this->belongsTo(Maskapai::class, 'id_maskapai');
     }
 
-    // Satu rute bisa memiliki banyak jadwal kereta
-    public function jadwalKereta()
+    // Satu rute bisa memiliki banyak jadwal maskapai
+    public function jadwalMaskapai()
     {
         return $this->hasMany(JadwalMaskapai::class, 'id_rute');
     }

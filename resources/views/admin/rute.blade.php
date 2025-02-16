@@ -45,7 +45,7 @@
 
             <div class="relative overflow-x-auto mt-6">
                 <table class="w-full text-sm text-left text-gray-500">
-                    <thead class="text-xs text-gray-700 uppercase bg-blue-500 text-white text-center">
+                    <thead class="text-xs uppercase bg-blue-500 text-white text-center">
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
                             <th scope="col" class="px-6 py-3">Maskapai</th>
@@ -59,7 +59,7 @@
                         @foreach ($rute as $index => $r)
                             <tr>
                                 <td class="px-6 py-4 font-medium text-gray-900">{{ $index + 1 }}</td>
-                                <td class="px-6 py-4">{{ $r->kereta->nama_maskapai }}</td>
+                                <td class="px-6 py-4">{{ $r->maskapai->nama_maskapai }}</td>
                                 <td class="px-6 py-4">{{ $r->kotaAsal->nama_kota }}</td>
                                 <td class="px-6 py-4">{{ $r->kotaTujuan->nama_kota }}</td>
                                 <td class="px-6 py-4">{{ $r->tanggal_pergi }}</td>

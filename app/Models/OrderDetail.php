@@ -10,7 +10,7 @@ class OrderDetail extends Model
     use HasFactory;
 
     protected $table = 'order_detail';
-    protected $fillable = ['id_user', 'id_kereta', 'id_order', 'jumlah_tiket', 'total_harga'];
+    protected $fillable = ['id_user', 'id_maskapai', 'id_order', 'jumlah_tiket', 'total_harga'];
 
     // Setiap order detail dimiliki oleh satu order tiket
     public function orderTiket()
@@ -25,8 +25,8 @@ class OrderDetail extends Model
     }
 
     // Order detail merujuk pada jadwal kereta
-    public function jadwalKereta()
+    public function jadwalMaskapai()
     {
-        return $this->belongsTo(JadwalMaskapai::class, 'id_kereta');
+        return $this->belongsTo(JadwalMaskapai::class, 'id_maskapai');
     }
 }
