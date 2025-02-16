@@ -66,7 +66,7 @@ Route::group(['as' => 'admin.'], function () {
     Route::get('/jadwal-maskapai/create', [JadwalMaskapaiController::class, 'create'])->name('jadwal-maskapai.create');
     Route::post('/jadwal-maskapai', [JadwalMaskapaiController::class, 'store'])->name('jadwal-maskapai.store');
     Route::get('/jadwal-maskapai/{id}/edit', [JadwalMaskapaiController::class, 'edit'])->name('jadwal-maskapai.edit');
-    Route::put('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'update'])->name('jadwal-maskapai.update')->where('jadwal', '[0-9]+');
+    Route::put('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'update'])->name('jadwal-maskapai.update');
     Route::delete('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'destroy'])->name('jadwal-maskapai.destroy');
 });
 

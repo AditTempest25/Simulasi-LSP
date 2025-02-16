@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Rute;
 use App\Models\Maskapai;
 use App\Models\MasterKota;
@@ -22,7 +24,16 @@ class RuteController extends Controller
         }
 
         $rute = $query->get();
-        return view('admin.rute', compact('rute'));
+        // return view('admin.rute', compact('rute'));
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.rute', compact('rute'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.rute', compact('rute'));
+        } else {
+            return view('rute', compact('rute')); //  untuk penumpang
+        }
+        
     }
 
     public function create()
