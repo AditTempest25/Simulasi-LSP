@@ -23,11 +23,6 @@
             <!-- Header -->
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-blue-800">Selamat Datang, {{ Auth::user()->name }}</h2>
-                <div class="flex items-center space-x-4">
-                    <input type="text" placeholder="Search..." class="px-3 py-2 border rounded-lg">
-                    <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center text-white"><i
-                            class="fa-solid fa-user"></i></div>
-                </div>
             </div>
 
             <!-- Stats Cards -->
