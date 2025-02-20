@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Jadwal Penerbangan</title>
+    <title>Halaman Admin - Jadwal Penerbangan</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -22,7 +22,6 @@
                 <!-- Header -->
                 <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
                     <h2 class="text-3xl font-bold text-blue-800 mb-4 sm:mb-0">Data Jadwal Penerbangan</h2>
-                    <!-- FORM PENCARIAN (opsional) -->
                     <form method="GET" action="{{ route('admin.jadwal-maskapai') }}"
                         class="flex items-center space-x-2 w-full sm:w-auto">
                         <input type="text" name="q" value="{{ request('q') }}" placeholder="Search..."
@@ -67,7 +66,7 @@
                                     <td class="px-4 py-3">{{ $jadwal->firstItem() + $index }}</td>
                                     <td class="px-4 py-3">{{ $j->rute->maskapai->nama_maskapai }}</td>
                                     <td class="px-4 py-3">
-                                        Rute #{{ $j->rute->id_rute }}<br>
+                                        Rute {{ $j->rute->id_rute }}<br>
                                         ({{ $j->rute->kotaAsal->nama_kota }} - {{ $j->rute->kotaTujuan->nama_kota }})
                                     </td>
                                     <td class="px-4 py-3">{{ $j->rute->tanggal_pergi }}</td>

@@ -24,8 +24,8 @@ Route::middleware([
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
-Route::group(['as' => 'admin.'], function () {
-    // Pengguna / Penumpang
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(function () {
+    // Penumpang
     Route::get('/data-pengguna', [UserController::class, 'index'])->name('data-pengguna');
     Route::delete('/data-pengguna/{id}', [UserController::class, 'destroy'])->name('data-pengguna.destroy');
 
@@ -37,7 +37,43 @@ Route::group(['as' => 'admin.'], function () {
     Route::put('/data-petugas/{id}', [PetugasController::class, 'update'])->name('data-petugas.update');
     Route::delete('/data-petugas/{id}', [PetugasController::class, 'destroy'])->name('data-petugas.destroy');
 
-    // ✅ Maskapai (Menggunakan Controller)
+    // Maskapai 
+    Route::get('/maskapai', [MaskapaiController::class, 'index'])->name('maskapai');
+    Route::get('/maskapai/create', [MaskapaiController::class, 'create'])->name('maskapai.create');
+    Route::post('/maskapai', [MaskapaiController::class, 'store'])->name('maskapai.store');
+    Route::get('/maskapai/{id}/edit', [MaskapaiController::class, 'edit'])->name('maskapai.edit');
+    Route::put('/maskapai/{id}', [MaskapaiController::class, 'update'])->name('maskapai.update');
+    Route::delete('/maskapai/{id}', [MaskapaiController::class, 'destroy'])->name('maskapai.destroy');
+
+    // Master Kota
+    Route::get('/master-kota', [MasterKotaController::class, 'index'])->name('master-kota');
+    Route::get('/master-kota/create', [MasterKotaController::class, 'create'])->name('master-kota.create');
+    Route::post('/master-kota', [MasterKotaController::class, 'store'])->name('master-kota.store');
+    Route::get('/master-kota/{id}/edit', [MasterKotaController::class, 'edit'])->name('master-kota.edit');
+    Route::put('/master-kota/{id}', [MasterKotaController::class, 'update'])->name('master-kota.update');
+    Route::delete('/master-kota/{id}', [MasterKotaController::class, 'destroy'])->name('master-kota.destroy');
+
+    // Rute
+    Route::get('/rute', [RuteController::class, 'index'])->name('rute');
+    Route::get('/rute/create', [RuteController::class, 'create'])->name('rute.create');
+    Route::post('/rute', [RuteController::class, 'store'])->name('rute.store');
+    Route::get('/rute/edit/{id}', [RuteController::class, 'edit'])->name('rute.edit');
+    Route::put('/rute/update/{id}', [RuteController::class, 'update'])->name('rute.update');
+    Route::delete('/rute/delete/{id}', [RuteController::class, 'destroy'])->name('rute.destroy');
+
+    // Jadwal Penerbangan
+    Route::get('/jadwal-maskapai', [JadwalMaskapaiController::class, 'index'])->name('jadwal-maskapai');
+    Route::get('/jadwal-maskapai/create', [JadwalMaskapaiController::class, 'create'])->name('jadwal-maskapai.create');
+    Route::post('/jadwal-maskapai', [JadwalMaskapaiController::class, 'store'])->name('jadwal-maskapai.store');
+    Route::get('/jadwal-maskapai/{id}/edit', [JadwalMaskapaiController::class, 'edit'])->name('jadwal-maskapai.edit');
+    Route::put('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'update'])->name('jadwal-maskapai.update');
+    Route::delete('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'destroy'])->name('jadwal-maskapai.destroy');
+});
+
+Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->as('petugas.')->group(function () {
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Maskapai
     Route::get('/maskapai', [MaskapaiController::class, 'index'])->name('maskapai');
     Route::get('/maskapai/create', [MaskapaiController::class, 'create'])->name('maskapai.create');
     Route::post('/maskapai', [MaskapaiController::class, 'store'])->name('maskapai.store');

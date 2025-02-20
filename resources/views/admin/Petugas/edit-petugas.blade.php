@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Petugas</title>
-    <!-- Sertakan Tailwind via CDN -->
+    <title>Edit Petugas - Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -54,7 +53,7 @@
                     <input type="text" name="alamat" id="alamat" value="{{ $petugas->alamat }}" required
                         class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <!-- Field Gender (jenis_kelamin) -->
+                <!-- Field Gender -->
                 <div class="mb-4">
                     <label for="jenis_kelamin" class="block text-gray-700 font-semibold mb-2">Gender:</label>
                     <select name="jenis_kelamin" id="jenis_kelamin" required

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Halaman Admin</title>
+    <title>Halaman Admin - Users</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -22,20 +22,20 @@
             <!-- Header -->
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-blue-800">Data Pengguna</h2>
-                <!-- FORM PENCARIAN -->
                 <form method="GET" action="{{ route('admin.data-pengguna') }}" class="flex items-center space-x-4">
                     <input type="text" name="q" value="{{ request('q') }}" placeholder="Search..."
                         class="px-3 py-2 border rounded-lg">
                     <button type="submit" class="px-3 py-2 bg-blue-700 text-white rounded-lg">
                         <i class="fa-solid fa-search"></i>
                     </button>
-                    @if(request('q'))
-                        <a href="{{ route('admin.data-pengguna') }}" class="px-3 py-2 bg-gray-500 text-white rounded-lg">
+                    @if (request('q'))
+                        <a href="{{ route('admin.data-pengguna') }}"
+                            class="px-3 py-2 bg-gray-500 text-white rounded-lg">
                             <i class="fa-solid fa-times"></i> Reset
                         </a>
                     @endif
                 </form>
-                
+
             </div>
 
             <div class="relative overflow-x-auto mt-6">
@@ -94,7 +94,10 @@
                     </tbody>
                 </table>
             </div>
-
+            <!-- Pagination Links -->
+            <div class="mt-6">
+                {{ $penumpang->links() }}
+            </div>
         </div>
 </body>
 

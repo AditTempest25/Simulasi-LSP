@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tambah Jadwal Penerbangan - Admin</title>
+    <title>Tambah Rute</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -15,7 +15,7 @@
 <body class="bg-gray-100">
     <div class="max-w-3xl mx-auto p-6">
         <div class="bg-white p-8 rounded shadow">
-            <h2 class="text-2xl font-bold mb-6 text-center">Tambah Jadwal Penerbangan</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center">Tambah Rute (Petugas)</h2>
             @if ($errors->any())
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                     <ul>
@@ -25,46 +25,55 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.jadwal-maskapai.store') }}" method="POST">
+            <form action="{{ route('petugas.rute.store') }}" method="POST">
                 @csrf
-                <!-- Rute -->
+                <!-- Kota Asal -->
                 <div class="mb-4">
-                    <label for="id_rute" class="block text-gray-700 font-semibold mb-2">Rute:</label>
-                    <select name="id_rute" id="id_rute" required
+                    <label for="kota_asal" class="block text-gray-700 font-semibold mb-2">Kota Asal:</label>
+                    <select name="kota_asal" id="kota_asal" required
                         class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        @foreach ($rute as $r)
-                            <option value="{{ $r->id_rute }}">Rute {{ $r->id_rute }} ({{ $r->kotaAsal->nama_kota }}
-                                ke {{ $r->kotaTujuan->nama_kota }})</option>
+                        @foreach ($kota as $city)
+                            <option value="{{ $city->id }}">{{ $city->nama_kota }}</option>
                         @endforeach
                     </select>
                 </div>
-                <!-- Waktu Berangkat -->
+                <!-- Kota Tujuan -->
                 <div class="mb-4">
-                    <label for="waktu_berangkat" class="block text-gray-700 font-semibold mb-2">Waktu Berangkat:</label>
-                    <input type="time" name="waktu_berangkat" id="waktu_berangkat" required
+                    <label for="kota_tujuan" class="block text-gray-700 font-semibold mb-2">Kota Tujuan:
+                        @error('kota_tujuan')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </label>
+                    <select name="kota_tujuan" id="kota_tujuan" required
                         class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        @foreach ($kota as $city)
+                            <option value="{{ $city->id }}">{{ $city->nama_kota }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <!-- Waktu Tiba -->
+                <!-- Maskapai -->
                 <div class="mb-4">
-                    <label for="waktu_tiba" class="block text-gray-700 font-semibold mb-2">Waktu Tiba:</label>
-                    <input type="time" name="waktu_tiba" id="waktu_tiba" required
+                    <label for="maskapai" class="block text-gray-700 font-semibold mb-2">Maskapai:</label>
+                    <select name="id_maskapai" id="maskapai" required
                         class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        @foreach ($maskapai as $pesawat)
+                            <option value="{{ $pesawat->id_maskapai }}">{{ $pesawat->nama_maskapai }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <!-- Harga -->
+                <!-- Tanggal Pergi -->
                 <div class="mb-4">
-                    <label for="harga" class="block text-gray-700 font-semibold mb-2">Harga:</label>
-                    <input type="number" name="harga" id="harga" required placeholder="Harga Tiket"
-                        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <!-- Kapasitas -->
-                <div class="mb-4">
-                    <label for="kapasitas" class="block text-gray-700 font-semibold mb-2">Kapasitas:</label>
-                    <input type="number" name="kapasitas" id="kapasitas" required placeholder="Kapasitas Pesawat"
+                    <label for="tanggal_pergi" class="block text-gray-700 font-semibold mb-2">Tanggal Pergi:
+                        @error('tanggal_pergi')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </label>
+                    <input type="date" name="tanggal_pergi" id="tanggal_pergi" required
                         class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <!-- Tombol Submit -->
                 <div class="text-center">
-                    <a href="{{ route('admin.jadwal-maskapai') }}"
+                    <a href="{{ route('petugas.rute') }}"
                         class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded transition duration-200 me-4">
                         <i class="fa-solid fa-arrow-left me-2"></i>
                         Kembali

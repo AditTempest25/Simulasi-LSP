@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // Pakai model User
+use App\Models\User;
 
 class PetugasController extends Controller
 {
@@ -11,31 +11,20 @@ class PetugasController extends Controller
     {
 
         $query = User::where('role', 'petugas');
-
-        // Jika ada parameter pencarian (q) dan tidak kosong
         if ($request->has('q') && !empty($request->q)) {
             $query->where('name', 'LIKE', '%' . $request->q . '%');
         }
 
         $petugas = $query->get();
-
-        // Ambil user dengan role 'petugas'
-        // $petugas = User::where('role', 'petugas')->get();
-
         return view('admin.data-petugas', compact('petugas'));
     }
-
     public function create()
     {
-        // Set password default jika tidak diisi
         $password = '123456789';
         return view('admin.petugas.create-petugas', compact('password'));
     }
-
-
     public function store(Request $request)
     {
-        // Validasi dan simpan data petugas
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -47,13 +36,12 @@ class PetugasController extends Controller
             'email.unique' => 'Email ini sudah ada, silakan gunakan email lain.',
         ]);
 
-        // Set password default jika tidak diisi
         $password = '123456789';
 
         $petugas = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($password), // Password default
+            'password' => bcrypt($password),
             'role' => 'petugas',
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -62,13 +50,11 @@ class PetugasController extends Controller
 
         return redirect()->route('admin.data-petugas')->with('success', 'Petugas berhasil ditambahkan');
     }
-
     public function edit($id)
     {
         $petugas = User::findOrFail($id);
-        return view('admin.petugas.edit-petugas', compact('petugas')); // Pastikan ada view untuk form edit petugas
+        return view('admin.petugas.edit-petugas', compact('petugas'));
     }
-
     public function update(Request $request, $id)
     {
         $petugas = User::findOrFail($id);
@@ -90,7 +76,6 @@ class PetugasController extends Controller
 
         return redirect()->route('admin.data-petugas')->with('success', 'Petugas berhasil diupdate');
     }
-
     public function destroy($id)
     {
         $petugas = User::findOrFail($id);

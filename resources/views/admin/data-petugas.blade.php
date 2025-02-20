@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Halaman Admin</title>
+    <title>Halaman Admin - Petuags</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -22,14 +22,13 @@
             <!-- Header -->
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-blue-800">Data Petugas</h2>
-                <!-- FORM PENCARIAN -->
                 <form method="GET" action="{{ route('admin.data-petugas') }}" class="flex items-center space-x-4">
                     <input type="text" name="q" value="{{ request('q') }}" placeholder="Search..."
                         class="px-3 py-2 border rounded-lg">
                     <button type="submit" class="px-3 py-2 bg-blue-700 text-white rounded-lg">
                         <i class="fa-solid fa-search"></i>
                     </button>
-                    @if(request('q'))
+                    @if (request('q'))
                         <a href="{{ route('admin.data-petugas') }}" class="px-3 py-2 bg-gray-500 text-white rounded-lg">
                             <i class="fa-solid fa-times"></i> Reset
                         </a>
@@ -73,16 +72,16 @@
                                         <i class="fa-solid fa-pen-to-square me-2"></i>Edit
                                     </a>
 
-                                        <!-- Tombol Delete -->
-                                        <form action="{{ route('admin.data-petugas.destroy', $p->id) }}" method="POST"
-                                            class="inline-block" onsubmit="return confirm('Yakin hapus data?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="px-2 py-1 text-sm ms-2 text-white bg-red-700 rounded-md hover:bg-red-800">
-                                                <i class="fa-solid fa-trash me-2"></i>Delete
-                                            </button>
-                                        </form>
+                                    <!-- Tombol Delete -->
+                                    <form action="{{ route('admin.data-petugas.destroy', $p->id) }}" method="POST"
+                                        class="inline-block" onsubmit="return confirm('Yakin hapus data?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="px-2 py-1 text-sm ms-2 text-white bg-red-700 rounded-md hover:bg-red-800">
+                                            <i class="fa-solid fa-trash me-2"></i>Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

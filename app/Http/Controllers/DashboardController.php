@@ -7,14 +7,14 @@ use App\Models\User;
 use App\Models\Maskapai;
 use App\Models\JadwalMaskapai;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $user = Auth::user(); // Ambil user yang login
+        $user = Auth::user();
 
-        // Jika admin, tampilkan dashboard admin + statistik
         if ($user->role === 'admin') {
             return view('admin.dashboard', [
                 'totalPesawat' => Maskapai::count(),
@@ -24,12 +24,18 @@ class DashboardController extends Controller
             ]);
         }
 
-        // Jika petugas, arahkan ke dashboard petugas
         if ($user->role === 'petugas') {
-            return view('petugas.dashboard');
+            $date = request('date') ? Carbon::parse(request('date')) : Carbon::today();
+
+            $jadwal = JadwalMaskapai::whereHas('rute', function ($query) use ($date) {
+                $query->whereDate('tanggal_pergi', $date);
+            })->paginate(5);
+
+            return view('petugas.dashboard', [
+                'jadwal' => $jadwal,
+            ]);
         }
 
-        // Default untuk user biasa (penumpang)
         return view('dashboard');
     }
 }

@@ -21,7 +21,6 @@
         <div class="flex-1 p-6 bg-white rounded-lg shadow-md m-4">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-blue-800">Manajemen Rute</h2>
-                <!-- FORM PENCARIAN -->
                 <form method="GET" action="{{ route('admin.rute') }}" class="flex items-center space-x-4">
                     <input type="text" name="q" value="{{ request('q') }}" placeholder="Search..."
                         class="px-3 py-2 border rounded-lg">
@@ -82,6 +81,10 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+            <!-- Pagination Links -->
+            <div class="mt-6">
+                {{ $rute->links() }}
             </div>
         </div>
     </div>

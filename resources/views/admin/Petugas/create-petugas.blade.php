@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tambah Petugas</title>
-    <!-- Sertakan Tailwind via CDN -->
+    <title>Tambah Petugas - Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -36,7 +35,7 @@
                 </div>
                 <!-- Field Email -->
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700 font-semibold mb-2">Email: 
+                    <label for="email" class="block text-gray-700 font-semibold mb-2">Email:
                         @error('email')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -48,9 +47,10 @@
 
                 <!-- Field Password -->
                 <div class="mb-4">
-                    <label for="password" class="block text-gray-700 font-semibold mb-2">Password:</label>
+                    <label for="password" class="block text-gray-700 font-semibold mb-2">Password: <span
+                            class="text-red-500 font-bold">*General</span> </label>
                     <input type="text" name="password" id="password" value="{{ $password }}" readonly
-                        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-black text-white font-bold">
                 </div>
                 <!-- Field Tanggal Lahir -->
                 <div class="mb-4">

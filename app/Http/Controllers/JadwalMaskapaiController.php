@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\JadwalMaskapai;
 use App\Models\Rute;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalMaskapaiController extends Controller
 {
-    // Tampilkan daftar jadwal penerbangan
     public function index(Request $request)
     {
-    
+
         $query = JadwalMaskapai::with('rute.maskapai', 'rute.kotaAsal', 'rute.kotaTujuan');
 
         if ($request->has('q') && !empty($request->q)) {
@@ -20,21 +20,29 @@ class JadwalMaskapaiController extends Controller
                 $q->where('nama_maskapai', 'LIKE', '%' . $request->q . '%');
             });
         }
-    
-        $jadwal = $query->paginate(5)->appends($request->query());
-        return view('admin.jadwal-maskapai', compact('jadwal'));
-        
-    }
 
-    // Tampilkan form tambah jadwal penerbangan
+        $jadwal = $query->paginate(5)->appends($request->query());
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.jadwal-maskapai', compact('jadwal'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.jadwal-maskapai', compact('jadwal'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
+    }
     public function create()
     {
-        // Ambil daftar rute untuk dipilih (asumsikan rute sudah ada)
         $rute = Rute::all();
-        return view('admin.jadwal.create-jadwal', compact('rute'));
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.jadwal.create-jadwal', compact('rute'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.jadwal.create-jadwal', compact('rute'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
-    // Simpan data jadwal penerbangan baru
     public function store(Request $request)
     {
         $request->validate([
@@ -47,21 +55,32 @@ class JadwalMaskapaiController extends Controller
             'id_rute.exists' => 'Rute tidak ditemukan.',
             'waktu_berangkat.date_format' => 'Format waktu berangkat harus HH:MM.',
             'waktu_tiba.date_format'      => 'Format waktu tiba harus HH:MM.',
+            'kapasitas.integer'           => 'kapasitas minimal 1.',
         ]);
 
         JadwalMaskapai::create($request->all());
-        return redirect()->route('admin.jadwal-maskapai')->with('success', 'Jadwal penerbangan berhasil ditambahkan.');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.jadwal-maskapai')->with('success', 'Jadwal penerbangan berhasil ditambahkan.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.jadwal-maskapai')->with('success', 'Jadwal penerbangan berhasil ditambahkan.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
-    // Tampilkan form edit jadwal penerbangan
     public function edit($id)
     {
         $jadwal = JadwalMaskapai::findOrFail($id);
         $rute = Rute::all();
-        return view('admin.jadwal.edit-jadwal', compact('jadwal', 'rute'));
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.jadwal.edit-jadwal', compact('jadwal', 'rute'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.jadwal.edit-jadwal', compact('jadwal', 'rute'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
-    // Update data jadwal penerbangan
     public function update(Request $request, $id)
     {
         $jadwal = JadwalMaskapai::findOrFail($id);
@@ -71,8 +90,11 @@ class JadwalMaskapaiController extends Controller
             'waktu_tiba'      => 'required|date_format:H:i',
             'harga'           => 'required|integer|min:0',
             'kapasitas'       => 'required|integer|min:1',
+        ], [
+            'kapasitas.integer'           => 'kapasitas minimal 1.',
+
         ]);
-        
+
         $jadwal->update([
             'id_rute'         => $request->id_rute,
             'waktu_berangkat' => $request->waktu_berangkat,
@@ -80,15 +102,30 @@ class JadwalMaskapaiController extends Controller
             'harga'           => $request->harga,
             'kapasitas'       => $request->kapasitas,
         ]);
-        return redirect()->route('admin.jadwal-maskapai')
-                        ->with('success', 'Jadwal penerbangan berhasil diperbarui.');
+
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.jadwal-maskapai')
+                ->with('success', 'Jadwal penerbangan berhasil diperbarui.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.jadwal-maskapai')
+                ->with('success', 'Jadwal penerbangan berhasil diperbarui.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-            
-    // Hapus jadwal penerbangan
+
     public function destroy($id)
     {
-        $jadwal = JadwalMaskapai::findOrFail($id);  
+        $jadwal = JadwalMaskapai::findOrFail($id);
         $jadwal->delete();
-        return redirect()->route('admin.jadwal-maskapai')->with('success', 'Jadwal penerbangan berhasil dihapus.');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.jadwal-maskapai')->with('success', 'Jadwal penerbangan berhasil dihapus.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.jadwal-maskapai')->with('success', 'Jadwal penerbangan berhasil dihapus.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 }

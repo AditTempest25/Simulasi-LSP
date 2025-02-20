@@ -14,7 +14,6 @@ class RuteController extends Controller
     public function index(Request $request)
     {
         $query = Rute::with(['maskapai', 'kotaAsal', 'kotaTujuan']);
-
         if ($request->has('q') && !empty($request->q)) {
             $query->whereHas('kotaAsal', function ($q) use ($request) {
                 $q->where('nama_kota', 'LIKE', '%' . $request->q . '%');
@@ -22,27 +21,29 @@ class RuteController extends Controller
                 $q->where('nama_kota', 'LIKE', '%' . $request->q . '%');
             });
         }
-
-        $rute = $query->get();
-        // return view('admin.rute', compact('rute'));
+        $rute = $query->paginate(7)->appends($request->query());
         $user = Auth::user();
         if ($user->role === 'admin') {
             return view('admin.rute', compact('rute'));
         } elseif ($user->role === 'petugas') {
             return view('petugas.rute', compact('rute'));
         } else {
-            return view('rute', compact('rute')); //  untuk penumpang
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
         }
-        
     }
-
     public function create()
     {
-        $maskapai = Maskapai::all();
+        $maskapai = Maskapai::where('status', 'aktif')->get(); 
         $kota = MasterKota::all();
-        return view('admin.rute.create-rute', compact('maskapai', 'kota'));
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.rute.create-rute', compact('maskapai', 'kota'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.rute.create-rute', compact('maskapai', 'kota'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -62,17 +63,30 @@ class RuteController extends Controller
             'tanggal_pergi' => $request->tanggal_pergi,
         ]);
     
-        return redirect()->route('admin.rute')->with('success', 'Rute berhasil ditambahkan.');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.rute')->with('success', 'Rute berhasil ditambahkan.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.rute')->with('success', 'Rute berhasil ditambahkan.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
     public function edit($id)
     {
         $rute = Rute::findOrFail($id);
         $maskapai = Maskapai::all();
         $kota = MasterKota::all();
-        return view('admin.rute.edit-rute', compact('rute', 'maskapai', 'kota'));
-    }
 
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.rute.edit-rute', compact('rute','maskapai', 'kota'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.rute.edit-rute', compact('rute','maskapai', 'kota'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
+    }
     public function update(Request $request, $id)
     {
         $rute = Rute::findOrFail($id);
@@ -88,13 +102,27 @@ class RuteController extends Controller
         ]);
 
         $rute->update($request->all());
-        return redirect()->route('admin.rute')->with('success', 'Rute berhasil diperbarui.');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.rute')->with('success', 'Rute berhasil diubah.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.rute')->with('success', 'Rute berhasil diubah.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
     public function destroy($id)
     {
         $rute = Rute::findOrFail($id);
         $rute->delete();
-        return redirect()->route('admin.rute')->with('success', 'Rute berhasil dihapus.');
+
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.rute')->with('success', 'Rute berhasil dihapus.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.rute')->with('success', 'Rute berhasil dihapus.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 }

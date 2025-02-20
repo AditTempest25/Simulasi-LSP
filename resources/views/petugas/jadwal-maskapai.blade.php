@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Petugas</title>
+    <title>Halaman Petugas - Jadwal Penerbangan</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -12,7 +12,7 @@
 </head>
 
 <body class="bg-gray-100">
-    <div class="flex flex-col lg:flex-row">
+    <div class="flex flex-col lg:flex-row h-full">
         <!-- Sidebar -->
         <x-sidebar-petugas></x-sidebar-petugas>
 
@@ -21,15 +21,28 @@
             <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8">
                 <!-- Header -->
                 <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
-                    <h2 class="text-3xl font-bold text-blue-800 mb-4 sm:mb-0">Jadwal Penerbangan</h2>
-                    <!-- Ubah action form ke route dashboard -->
-                    <form method="GET" action="{{ route('dashboard') }}"
+                    <h2 class="text-3xl font-bold text-blue-800 mb-4 sm:mb-0">Data Jadwal Penerbangan (Petugas)</h2>
+                    <form method="GET" action="{{ route('petugas.jadwal-maskapai') }}"
                         class="flex items-center space-x-2 w-full sm:w-auto">
-                        <input type="date" name="date"
-                            value="{{ request('date') ?? \Carbon\Carbon::today()->format('Y-m-d') }}"
-                            onchange="this.form.submit()"
+                        <input type="text" name="q" value="{{ request('q') }}" placeholder="Search..."
                             class="w-full sm:w-auto px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button type="submit" class="px-3 py-2 bg-blue-700 text-white rounded-lg">
+                            <i class="fa-solid fa-search"></i>
+                        </button>
+                        @if (request('q'))
+                            <a href="{{ route('petugas.jadwal-maskapai') }}"
+                                class="px-3 py-2 bg-gray-500 text-white rounded-lg">
+                                <i class="fa-solid fa-times"></i> Reset
+                            </a>
+                        @endif
                     </form>
+                </div>
+
+                <div class="mb-6">
+                    <a href="{{ route('petugas.jadwal-maskapai.create') }}"
+                        class="px-4 py-2 bg-blue-700 rounded-md text-white hover:bg-blue-800 inline-flex items-center">
+                        <i class="fa-solid fa-plus me-2"></i>Tambah Jadwal
+                    </a>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -44,10 +57,11 @@
                                 <th class="px-4 py-3">Waktu Tiba</th>
                                 <th class="px-4 py-3">Harga</th>
                                 <th class="px-4 py-3">Kapasitas</th>
+                                <th class="px-4 py-3">Action</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 text-center">
-                            @forelse ($jadwal as $index => $j)
+                            @foreach ($jadwal as $index => $j)
                                 <tr>
                                     <td class="px-4 py-3">{{ $jadwal->firstItem() + $index }}</td>
                                     <td class="px-4 py-3">{{ $j->rute->maskapai->nama_maskapai }}</td>
@@ -60,15 +74,23 @@
                                     <td class="px-4 py-3">{{ $j->waktu_tiba }}</td>
                                     <td class="px-4 py-3">Rp. {{ number_format($j->harga, 0, ',', '.') }}</td>
                                     <td class="px-4 py-3">{{ $j->kapasitas }}</td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="8" class="px-4 py-3 text-center">
-                                        Tidak ada jadwal penerbangan untuk tanggal yang dipilih. Silakan pilih tanggal
-                                        lain.
+                                    <td class="px-4 py-3 space-y-2">
+                                        <a href="{{ route('petugas.jadwal-maskapai.edit', $j->id_jadwal) }}"
+                                            class="block px-2 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 items-center justify-center">
+                                            <i class="fa-solid fa-pen-to-square me-1"></i> Edit
+                                        </a>
+                                        <form action="{{ route('petugas.jadwal-maskapai.destroy', $j->id_jadwal) }}"
+                                            method="POST" onsubmit="return confirm('Yakin hapus jadwal ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="w-full px-2 py-1 bg-red-700 text-white rounded-md hover:bg-red-800 inline-flex items-center justify-center">
+                                                <i class="fa-solid fa-trash me-1"></i> Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

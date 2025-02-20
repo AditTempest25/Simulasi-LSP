@@ -3,26 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MasterKota; // Import model MasterKota
+use App\Models\MasterKota;
+use Illuminate\Support\Facades\Auth;
 
 class MasterKotaController extends Controller
 {
     public function index(Request $request)
     {
         $query = MasterKota::query();
-
-        // Jika ada parameter pencarian (q) dan tidak kosong
         if ($request->has('q') && !empty($request->q)) {
             $query->where('nama_kota', 'LIKE', '%' . $request->q . '%');
         }
 
-        $kota = $query->get(); // Ambil data kota sesuai filter
-        return view('admin.master-kota', compact('kota'));
-    }
+        $kota = $query->paginate(7)->appends($request->query());
 
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.master-kota', compact('kota'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.master-kota', compact('kota'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
+    }
     public function create()
     {
-        return view('admin.kota.create-kota');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.kota.create-kota');
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.kota.create-kota');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
     public function store(Request $request)
     {
@@ -36,15 +49,27 @@ class MasterKotaController extends Controller
             'nama_kota' => $request->nama_kota,
         ]);
 
-        return redirect()->route('admin.master-kota')->with('success', 'Kota berhasil ditambahkan');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.master-kota')->with('success', 'Kota berhasil ditambahkan');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.master-kota')->with('success', 'Kota berhasil ditambahkan');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
     public function edit($id)
     {
         $kota = MasterKota::find($id);
-        return view('admin.kota.edit-kota', compact('kota'));
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.kota.edit-kota', compact('kota'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.kota.edit-kota', compact('kota'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -56,15 +81,26 @@ class MasterKotaController extends Controller
         $kota = MasterKota::findOrFail($id);
         $kota->nama_kota = $request->nama_kota;
         $kota->save();
-
-        return redirect()->route('admin.master-kota')->with('success', 'Kota berhasil diupdate');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.master-kota')->with('success', 'Kota berhasil diupdate');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.master-kota')->with('success', 'Kota berhasil diupdate');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
-
     public function destroy($id)
     {
         $kota = MasterKota::findOrFail($id);
         $kota->delete();
-        return redirect()->route('admin.master-kota')->with('success', 'Kota berhasil dihapus');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.master-kota')->with('success', 'Kota berhasil dihapus');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.master-kota')->with('success', 'Kota berhasil dihapus');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 }

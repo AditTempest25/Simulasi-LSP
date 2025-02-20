@@ -4,29 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Maskapai;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class MaskapaiController extends Controller
 {
-    // Menampilkan daftar maskapai
     public function index(Request $request)
     {
         $query = Maskapai::query();
-
-        // Jika ada parameter pencarian (q) dan tidak kosong
         if ($request->has('q') && !empty($request->q)) {
             $query->where('nama_maskapai', 'LIKE', '%' . $request->q . '%');
         }
-        $maskapai = $query->get(); // Ambil data kota sesuai filter
-        return view('admin.maskapai', compact('maskapai'));
-    }
+        $maskapai = $query->paginate(5)->appends($request->query());
 
-    // Menampilkan form tambah maskapai
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.maskapai', compact('maskapai'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.maskapai', compact('maskapai'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
+    }
     public function create()
     {
-        return view('admin.maskapai.create-maskapai');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.maskapai.create-maskapai');
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.maskapai.create-maskapai');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 
-    // Menyimpan data maskapai baru
     public function store(Request $request)
     {
         $request->validate([
@@ -36,14 +48,11 @@ class MaskapaiController extends Controller
             'status' => 'required|in:Aktif,Tidak Aktif',
         ]);
 
-        // Upload foto jika ada
         $path = null;
         if ($request->hasFile('logo_maskapai')) {
             $path = $request->file('logo_maskapai')->store('maskapai', 'public');
         }
 
-        // Simpan data ke database
-        // Simpan data ke database
         $maskapai = Maskapai::create([
             'nama_maskapai' => $request->nama_maskapai,
             'logo_maskapai' => $path,
@@ -51,19 +60,29 @@ class MaskapaiController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('admin.maskapai')->with('success', 'Maskapai berhasil ditambahkan!');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.maskapai')->with('success', 'Maskapai berhasil ditambahkan!');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.maskapai')->with('success', 'Maskapai berhasil ditambahkan!');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 
 
-    // Menampilkan form edit maskapai
     public function edit($id)
     {
         $maskapai = Maskapai::findOrFail($id);
-        return view('admin.maskapai.edit-maskapai', compact('maskapai'));
-        
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.maskapai.edit-maskapai', compact('maskapai'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.maskapai.edit-maskapai', compact('maskapai'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
-    // Memperbarui data maskapai
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -75,7 +94,7 @@ class MaskapaiController extends Controller
 
         $maskapai = Maskapai::findOrFail($id);
 
-        if ($request->hasFile('logo_maskapai'   )) {
+        if ($request->hasFile('logo_maskapai')) {
             $logo = $request->file('logo_maskapai')->store('logos', 'public');
             $maskapai->logo_maskapai = $logo;
         }
@@ -86,14 +105,27 @@ class MaskapaiController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('admin.maskapai')->with('success', 'Maskapai berhasil diperbarui.');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.maskapai')->with('success', 'Maskapai berhasil diperbarui.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.maskapai')->with('success', 'Maskapai berhasil diperbarui.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
-
-    // Menghapus data maskapai
     public function destroy($id)
     {
         $maskapai = Maskapai::findOrFail($id);
         $maskapai->delete();
-        return redirect()->route('admin.maskapai')->with('success', 'Maskapai berhasil dihapus.');
+
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.maskapai')->with('success', 'Maskapai berhasil dihapus.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.maskapai')->with('success', 'Maskapai berhasil dihapus.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 }
