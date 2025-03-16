@@ -49,6 +49,7 @@
                         <tr>
                             <th scope="col" class="px-6 py-3">No</th>
                             <th scope="col" class="px-6 py-3">Nama</th>
+                            <th scope="col" class="px-6 py-3">Email</th>
                             <th scope="col" class="px-6 py-3">Tanggal Lahir</th>
                             <th scope="col" class="px-6 py-3">Alamat</th>
                             <th scope="col" class="px-6 py-3">Gender</th>
@@ -62,6 +63,7 @@
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $index + 1 }}
                                 </td>
                                 <td class="px-6 py-4">{{ $p->name }}</td>
+                                <td class="px-6 py-4">{{ $p->email }}</td>
                                 <td class="px-6 py-4">{{ $p->tanggal_lahir }}</td>
                                 <td class="px-6 py-4">{{ $p->alamat }}</td>
                                 <td class="px-6 py-4">{{ $p->jenis_kelamin }}</td>

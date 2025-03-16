@@ -34,26 +34,33 @@
                     <select name="id_rute" id="id_rute" required
                         class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @foreach ($rute as $r)
-                            <option value="{{ $r->id_rute }}" {{ $jadwal->id_rute == $r->id_rute ? 'selected' : '' }}>
+                            <option value="{{ $r->id_rute }}" data-mask="{{ $r->maskapai->nama_maskapai }}"
+                                {{ $jadwal->id_rute == $r->id_rute ? 'selected' : '' }}>
                                 Rute {{ $r->id_rute }} ({{ $r->kotaAsal->nama_kota }} ke
                                 {{ $r->kotaTujuan->nama_kota }})
                             </option>
                         @endforeach
                     </select>
                 </div>
+                <!-- Tampilan Maskapai -->
+                <div class="mb-4">
+                    <label for="maskapai_display" class="block text-gray-700 font-semibold mb-2">Maskapai:</label>
+                    <input type="text" id="maskapai_display" readonly
+                        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
                 <!-- Waktu Berangkat -->
                 <div class="mb-4">
                     <label for="waktu_berangkat" class="block text-gray-700 font-semibold mb-2">Waktu Berangkat:</label>
                     <input type="time" name="waktu_berangkat" id="waktu_berangkat" required
-                    value="{{ \Carbon\Carbon::parse($jadwal->waktu_berangkat)->format('H:i') }}"
-                    class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        value="{{ \Carbon\Carbon::parse($jadwal->waktu_berangkat)->format('H:i') }}"
+                        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <!-- Waktu Tiba -->
                 <div class="mb-4">
                     <label for="waktu_tiba" class="block text-gray-700 font-semibold mb-2">Waktu Tiba:</label>
-                    <input type="time" name="waktu_tiba" id="waktu_tiba" required 
-                    value="{{ \Carbon\Carbon::parse($jadwal->waktu_tiba)->format('H:i') }}"
-                    class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="time" name="waktu_tiba" id="waktu_tiba" required
+                        value="{{ \Carbon\Carbon::parse($jadwal->waktu_tiba)->format('H:i') }}"
+                        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <!-- Harga -->
                 <div class="mb-4">
@@ -85,6 +92,22 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ruteSelect = document.getElementById('id_rute');
+            var maskapaiDisplay = document.getElementById('maskapai_display');
+            if (ruteSelect && maskapaiDisplay) {
+                var selectedOption = ruteSelect.options[ruteSelect.selectedIndex];
+                maskapaiDisplay.value = selectedOption.getAttribute('data-mask');
+
+                ruteSelect.addEventListener('change', function() {
+                    var selectedOption = this.options[this.selectedIndex];
+                    maskapaiDisplay.value = selectedOption.getAttribute('data-mask');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

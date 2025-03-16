@@ -15,7 +15,6 @@ class OrderTiket extends Model
     protected $keyType = 'string';
     protected $fillable = ['id_order', 'tanggal_transaksi', 'struk'];
 
-    // Satu order tiket bisa memiliki banyak order detail
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class, 'id_order');

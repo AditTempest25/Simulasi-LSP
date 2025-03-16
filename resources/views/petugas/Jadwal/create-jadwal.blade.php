@@ -33,10 +33,17 @@
                     <select name="id_rute" id="id_rute" required
                         class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @foreach ($rute as $r)
-                            <option value="{{ $r->id_rute }}">Rute {{ $r->id_rute }} ({{ $r->kotaAsal->nama_kota }}
-                                ke {{ $r->kotaTujuan->nama_kota }})</option>
+                            <option value="{{ $r->id_rute }}" data-mask="{{ $r->maskapai->nama_maskapai }}">
+                                Rute {{ $r->id_rute }} ({{ $r->kotaAsal->nama_kota }} ke {{ $r->kotaTujuan->nama_kota }})
+                            </option>
                         @endforeach
                     </select>
+                </div>
+                <!-- Tampilan Maskapai -->
+                <div class="mb-4">
+                    <label for="id_maskapai" class="block text-gray-700 font-semibold mb-2">Maskapai:</label>
+                    <input type="text" id="id_maskapai" readonly
+                           class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <!-- Waktu Berangkat -->
                 <div class="mb-4">
@@ -78,6 +85,22 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ruteSelect = document.getElementById('id_rute');
+            var maskapaiDisplay = document.getElementById('id_maskapai');
+            if(ruteSelect && maskapaiDisplay) {
+                var selectedOption = ruteSelect.options[ruteSelect.selectedIndex];
+                maskapaiDisplay.value = selectedOption.getAttribute('data-mask');
+
+                ruteSelect.addEventListener('change', function() {
+                    var selectedOption = this.options[this.selectedIndex];
+                    maskapaiDisplay.value = selectedOption.getAttribute('data-mask');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

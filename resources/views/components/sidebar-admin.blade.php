@@ -14,42 +14,42 @@
 
         <a href="{{ route('admin.data-petugas') }}"
             class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
-           {{ request()->is('data-petugas') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+           {{ request()->routeIs('admin.data-petugas') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
             <i class="fa-solid fa-user-tie"></i>
             <span>Data Petugas</span>
         </a>
 
         <a href="{{ route('admin.data-pengguna') }}"
             class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
-           {{ request()->is('data-pengguna') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+            {{ request()->routeIs('admin.data-pengguna') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
             <i class="fa-solid fa-users"></i>
             <span>Data Pengguna</span>
         </a>
 
         <a href="{{ route('admin.maskapai') }}"
             class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
-           {{ request()->is('maskapai') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+           {{ request()->routeIs('admin.maskapai') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
             <i class="fa-solid fa-plane"></i>
             <span>Maskapai</span>
         </a>
 
         <a href="{{ route('admin.master-kota') }}"
             class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
-           {{ request()->is('master-kota') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+           {{ request()->routeIs('admin.master-kota') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
             <i class="fa-solid fa-location-dot"></i>
             <span>Master Kota</span>
         </a>
 
         <a href="{{ route('admin.rute') }}"
             class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
-            {{ request()->is('rute') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+            {{ request()->routeIs('admin.rute') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
             <i class="fa-solid fa-map-location-dot"></i>
             <span>Rute</span>
         </a>
 
         <a href="{{ route('admin.jadwal-maskapai') }}"
             class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
-            {{ request()->is('jadwal-maskapai') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+            {{ request()->routeIs('admin.jadwal-maskapai') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
             <i class="fa-solid fa-calendar"></i> <span>Jadwal Penerbangan</span>
         </a>
 

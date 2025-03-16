@@ -106,6 +106,11 @@ Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->as('petugas.')->
     Route::delete('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'destroy'])->name('jadwal-maskapai.destroy');
 });
 
+Route::middleware(['auth', 'role:penumpang'])->prefix('petugas')->as('petugas.')->group(function () {
+    
+});
+
+
 Route::get('/logout', function () {
     Auth::logout(); // or auth()->guard()->logout();
     return redirect('/');

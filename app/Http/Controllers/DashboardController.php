@@ -36,6 +36,9 @@ class DashboardController extends Controller
             ]);
         }
 
-        return view('dashboard');
+        if ($user->role === 'penumpang') {
+            $jadwal = JadwalMaskapai::with('rute', 'maskapai')->paginate(5);
+            return view('dashboard', compact('jadwal'));
+        }
     }
 }
