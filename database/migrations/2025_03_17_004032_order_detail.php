@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('order_detail', function (Blueprint $table) {
             $table->id('id_order_detail');
-            $table->foreignId('id_order')->constrained('order_tiket')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('id_order')->constrained('order_tiket', 'id_order')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('id_user')->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('id_maskapai')->constrained('jadwal_maskapai', 'id_jadwal')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('id_order', 20);
             $table->integer('jumlah_tiket');
             $table->integer('total_harga');
-            $table->foreign('id_order')->references('id_order')->on('order_tiket')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
+        
     }
 
     /**

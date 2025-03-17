@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="min-w-full text-sm text-left text-gray-500">
+                    <table class="min-w-full text-sm text-left text-black">
                         <thead class="text-xs uppercase bg-blue-500 text-white text-center">
                             <tr>
                                 <th class="px-4 py-3">No</th>

@@ -22,7 +22,7 @@
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-blue-800">Manajemen Rute</h2>
                 <form method="GET" action="{{ route('admin.rute') }}" class="flex items-center space-x-4">
-                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Search..."
+                    <input type="text" name="q" value="{{ request('q') }}" placeholder="Search Kota..."
                         class="px-3 py-2 border rounded-lg">
                     <button type="submit" class="px-3 py-2 bg-blue-700 text-white rounded-lg">
                         <i class="fa-solid fa-search"></i>

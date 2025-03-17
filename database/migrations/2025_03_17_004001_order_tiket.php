@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_tiket', function (Blueprint $table) {
-            $table->string('id_order', 20)->primary();
+            $table->unsignedBigInteger('id_order')->primary();
+            $table->foreignId('id_user')->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('id_rute')->constrained('rute', 'id_rute')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('id_maskapai')->constrained('maskapai', 'id_maskapai')->onDelete('cascade')->onUpdate('cascade');
             $table->date('tanggal_transaksi');
-            $table->string('struk', 100);
+            $table->enum('status_verifikasi', ['pending', 'verified', 'rejected'])->default('pending');
             $table->timestamps();
         });
 

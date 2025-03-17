@@ -61,7 +61,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 text-center">
-                            @foreach ($jadwal as $index => $j)
+                            @forelse ($jadwal as $index => $j)
                                 <tr>
                                     <td class="px-4 py-3">{{ $jadwal->firstItem() + $index }}</td>
                                     <td class="px-4 py-3">{{ $j->rute->maskapai->nama_maskapai }}</td>
@@ -90,7 +90,13 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="px-4 py-3 text-center">
+                                        Tidak ada jadwal penerbangan untuk saat ini, silahkan input terlebih dahulu
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -50,7 +50,7 @@
                     <label for="password" class="block text-gray-700 font-semibold mb-2">Password: <span
                             class="text-red-500 font-bold">*General</span> </label>
                     <input type="text" name="password" id="password" value="{{ $password }}" readonly
-                        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-black text-white font-bold">
+                        class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-black text-black dark:text-white font-bold">
                 </div>
                 <!-- Field Tanggal Lahir -->
                 <div class="mb-4">

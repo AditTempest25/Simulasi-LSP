@@ -33,12 +33,12 @@
                 </div>
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
                     <a href="{{ route('admin.jadwal-maskapai') }}">
-                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Jadwal
+                        <span class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Jadwal
                             Penerbangan</span>
                     </a>
                     <i class="fa-solid fa-calendar"></i>
                     <div class="flex items-center justify-between">
-                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalJadwal }}</span>
+                        <span class="mt-5 text-3xl font-bold text-white dark:text-white">{{ $totalJadwal }}</span>
                     </div>
                 </div>
                 <div class="bg-white p-5 rounded-lg shadow-md">
@@ -48,35 +48,35 @@
                 <!-- Total Pesawat Aktif -->
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
                     <a href="{{ route('admin.maskapai') }}">
-                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Pesawat
+                        <span class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Total Pesawat
                             Aktif</span>
                         </a>
                         <i class="fa-solid fa-plane-up"></i>                    <div class="flex items-center justify-between">
-                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalPesawat }}</span>
+                        <span class="mt-5 text-3xl font-bold text-white dark:text-white">{{ $totalPesawat }}</span>
                     </div>
                 </div>
 
                 <!-- Data Pengguna -->
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
                     <a href="{{ route('admin.data-pengguna') }}">
-                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Data
+                        <span class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Data
                             Pengguna</span>
                         </a>
                         <i class="fa-solid fa-users"></i>
                     <div class="flex items-center justify-between">
-                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalPengguna }}</span>
+                        <span class="mt-5 text-3xl font-bold text-white dark:text-white">{{ $totalPengguna }}</span>
                     </div>
                 </div>
 
                 <!-- Data Petugas -->
                 <div class="p-4 bg-indigo-500 text-white rounded-lg shadow">
                     <a href="{{ route('admin.data-petugas') }}">
-                        <span class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Data
+                        <span class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Data
                             Petugas</span>
                         </a>
                         <i class="fa-solid fa-user-tie"></i>
                     <div class="flex items-center justify-between">
-                        <span class="mt-5 text-3xl font-bold text-gray-900 dark:text-white">{{ $totalPetugas }}</span>
+                        <span class="mt-5 text-3xl font-bold text-white dark:text-white">{{ $totalPetugas }}</span>
                     </div>
                 </div>
 
