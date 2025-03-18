@@ -41,9 +41,9 @@
                                 <th class="px-4 py-3">Rute</th>
                                 <th class="px-4 py-3">Tanggal Berangkat</th>
                                 <th class="px-4 py-3">Waktu Berangkat</th>
-                                <th class="px-4 py-3">Waktu Tiba</th>
+                                {{-- <th class="px-4 py-3">Waktu Tiba</th>
                                 <th class="px-4 py-3">Harga</th>
-                                <th class="px-4 py-3">Kapasitas</th>
+                                <th class="px-4 py-3">Kapasitas</th> --}}
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 text-center">
@@ -57,9 +57,9 @@
                                     </td>
                                     <td class="px-4 py-3">{{ $j->rute->tanggal_pergi }}</td>
                                     <td class="px-4 py-3">{{ $j->waktu_berangkat }}</td>
-                                    <td class="px-4 py-3">{{ $j->waktu_tiba }}</td>
+                                    {{-- <td class="px-4 py-3">{{ $j->waktu_tiba }}</td>
                                     <td class="px-4 py-3">Rp. {{ number_format($j->harga, 0, ',', '.') }}</td>
-                                    <td class="px-4 py-3">{{ $j->kapasitas }}</td>
+                                    <td class="px-4 py-3">{{ $j->kapasitas }}</td> --}}
                                 </tr>
                             @empty
                                 <tr>

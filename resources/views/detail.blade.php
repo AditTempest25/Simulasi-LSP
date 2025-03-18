@@ -22,18 +22,21 @@
             <div class="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Product Image -->
                 <div class="flex justify-center">
-                    <img src="{{ asset('storage/' . $detail->rute->maskapai->logo_maskapai) }}" alt="Product Image" class="rounded-lg shadow-lg">
+                    <img src="{{ asset('storage/' . $detail->rute->maskapai->logo_maskapai) }}" alt="Product Image"
+                        class="rounded-lg shadow-lg">
                 </div>
 
                 <!-- Product Details -->
                 <div>
                     <h2 class="text-2xl font-bold text-gray-900">{{ $detail->rute->maskapai->nama_maskapai }}</h2>
-                    <p class="text-gray-600 text-lg mt-2 font-bold">Price: {{ $detail->harga }}</p>
+                    <p class="text-gray-600 text-lg mt-2 font-bold">Price:
+                        {{ number_format($detail->harga, 0, ',', '.') }}</p>
                     <p class="text-gray-600 text-md mt-2 font-bold">Kapasitas: {{ $detail->kapasitas }}</p>
 
                     <div class="mt-4">
                         <label class="block font-medium text-gray-700">Rute :</label>
-                        <input type="text" value="{{ $detail->rute->kotaAsal->nama_kota }} → {{ $detail->rute->kotaTujuan->nama_kota }}"
+                        <input type="text"
+                            value="{{ $detail->rute->kotaAsal->nama_kota }} → {{ $detail->rute->kotaTujuan->nama_kota }}"
                             class="mt-1 w-full p-2 border rounded-lg" readonly>
                     </div>
                     <div class="mt-4">
@@ -43,10 +46,14 @@
                     </div>
                     <div class="mt-4">
                         <label class="block font-medium text-gray-700">Jam Tiba</label>
-                        <input type="text" value="{{ $detail->waktu_tiba }}" class="mt-1 w-full p-2 border rounded-lg"
-                            readonly>
+                        <input type="text" value="{{ $detail->waktu_tiba }}"
+                            class="mt-1 w-full p-2 border rounded-lg" readonly>
                     </div>
-
+                    <div class="mt-4">
+                        <label class="block font-medium text-gray-700">Total Tiket</label>
+                        <input type="number" value="{{ $detail->total_tiket ?? '0' }}"
+                            class="mt-1 w-full p-2 border rounded-lg">
+                    </div>
                     <button type="button"
                         class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mt-5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
