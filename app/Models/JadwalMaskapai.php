@@ -18,9 +18,14 @@ class JadwalMaskapai extends Model
         return $this->belongsTo(Rute::class, 'id_rute', 'id_rute');
     }
 
-    public function orderDetails()
+    // public function orderDetails()
+    // {
+    //     return $this->hasMany(OrderDetail::class, 'id_jadwal', 'id_jadwal');
+    // }
+
+    public function orderTiket()
     {
-        return $this->hasMany(OrderDetail::class, 'id_jadwal', 'id_jadwal');
+        return $this->hasMany(OrderTiket::class, 'id_jadwal', 'id_jadwal');
     }
 
     public function maskapai()

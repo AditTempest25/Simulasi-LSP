@@ -16,9 +16,9 @@
 
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
 
-    <div class="bg-white">
+    <div class="bg-white flex-1">
         <x-navbar-penumpang></x-navbar-penumpang>
 
         <!-- Hero Section -->
@@ -73,8 +73,6 @@
                     alt="">
             </div>
         </section>
-
-
 
         <!-- Fitur Section -->
         <section class="bg-white dark:bg-gray-900" data-aos="fade-up">
@@ -177,7 +175,7 @@
             </div>
         </section>
 
-        <x-footer></x-footer>
+        <x-footer class="mt-auto"></x-footer>
     </div>
 
 

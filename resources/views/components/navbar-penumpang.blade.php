@@ -12,7 +12,9 @@
                             class="px-3 py-2 text-sm font-medium text-white
                             {{ request()->routeIs('travel') ? 'rounded-md bg-gray-900' : 'hover:rounded-md hover:bg-gray-900' }}"
                             aria-current="page">Travel</a>
-                        <a href="#" class="px-3 py-2 text-sm font-medium text-white"
+                        <a href="{{ route('myticket') }}"
+                            class="px-3 py-2 text-sm font-medium text-white
+                            {{ request()->routeIs('myticket') ? 'rounded-md bg-gray-900' : 'hover:rounded-md hover:bg-gray-900' }}"
                             aria-current="page">My Ticket</a>
                         <a href="#" class="px-3 py-2 text-sm font-medium text-white"
                             aria-current="page">History</a>

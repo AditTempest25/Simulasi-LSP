@@ -24,7 +24,7 @@ class OrderTiketController extends Controller
         if (!$jadwal->rute) {
             return response()->json(['message' => 'Data rute tidak ditemukan untuk jadwal ini'], 422);
         }
-        
+
         $idMaskapai = $jadwal->rute->maskapai->id_maskapai;
         // dd($jadwal->toArray());
         if (!$jadwal->rute->maskapai) {
@@ -41,7 +41,7 @@ class OrderTiketController extends Controller
             'no_struk' => OrderTiket::generateNoStruk(),
         ]);
 
-        return redirect()->route('travel')->with('success','Tiket berhasil dibuat');
+        return redirect()->route('travel')->with('success', 'Tiket berhasil dibuat');
     }
 
     public function updateStatus(Request $request, $id)
@@ -55,4 +55,15 @@ class OrderTiketController extends Controller
 
         return response()->json(['message' => 'Status verifikasi diperbarui', 'order' => $order]);
     }
+
+    public function myTicket()
+{
+    $tickets = OrderTiket::where('id_user', Auth::id())
+        ->with(['jadwalMaskapai.rute', 'jadwalMaskapai.maskapai']) // Pakai jadwalMaskapai (bukan jadwal_maskapai)
+        ->orderBy('tanggal_transaksi', 'desc')
+        ->get();
+
+    return view('myticket', compact('tickets'));
+}
+
 }

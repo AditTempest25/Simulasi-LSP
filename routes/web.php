@@ -116,6 +116,9 @@ Route::middleware(['auth', 'role:penumpang'])->group(function () {
     Route::get('/detail/{id}', [DetailController::class, 'show'])->name('detail');
     Route::post('/order/store', [OrderTiketController::class, 'store'])->name('order.store');
 
+    Route::get('/myticket', [OrderTiketController::class, 'myTicket'])->name('myticket');
+
+    
 });
 
 
