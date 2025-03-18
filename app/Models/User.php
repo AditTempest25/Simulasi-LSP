@@ -73,10 +73,9 @@ class User extends Authenticatable
             return asset('storage/' . $this->profile_photo_path);
         }
 
-        // Ambil 2 inisial dari nama
         $name = urlencode($this->name); // Encode karakter spesial
         $background = substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-        
+
         return "https://ui-avatars.com/api/?name={$name}&background={$background}&color=fff&size=128&length=2";
     }
 }

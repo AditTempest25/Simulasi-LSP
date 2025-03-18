@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\JadwalMaskapaiController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\UserController;
@@ -8,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MasterKotaController;
 use App\Http\Controllers\MaskapaiController;
 use App\Http\Controllers\RuteController;
+use App\Http\Controllers\TravelController;
 use \App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -106,8 +108,10 @@ Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->as('petugas.')->
     Route::delete('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'destroy'])->name('jadwal-maskapai.destroy');
 });
 
-Route::middleware(['auth', 'role:penumpang'])->prefix('petugas')->as('petugas.')->group(function () {
-    
+Route::middleware(['auth', 'role:penumpang'])->group(function () {
+    Route::get('/travel', [TravelController::class, 'index'])->name('travel');
+
+    Route::get('/detail/{id}', [DetailController::class, 'show'])->name('detail');
 });
 
 
