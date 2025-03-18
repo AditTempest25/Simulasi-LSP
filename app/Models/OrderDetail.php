@@ -10,20 +10,25 @@ class OrderDetail extends Model
     use HasFactory;
 
     protected $table = 'order_detail';
-    protected $fillable = ['id_user', 'id_maskapai', 'id_order', 'jumlah_tiket', 'total_harga'];
+    protected $primaryKey = 'id_order_detail';
+    public $timestamps = true;
+
+    protected $fillable = [
+        'id_order',
+        'id_user',
+        'name',
+        'nama_maskapai',
+        'waktu_berangkat',
+        'waktu_tiba',
+        'kota_asal',
+        'kota_tujuan',
+        'total_tiket',
+        'tanggal_transaksi',
+        'total_harga',
+    ];
 
     public function orderTiket()
     {
-        return $this->belongsTo(OrderTiket::class, 'id_order');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'id_user');
-    }
-
-    public function jadwalMaskapai()
-    {
-        return $this->belongsTo(JadwalMaskapai::class, 'id_maskapai');
+        return $this->belongsTo(OrderTiket::class, 'id_order', 'id_order');
     }
 }

@@ -8,8 +8,10 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MasterKotaController;
 use App\Http\Controllers\MaskapaiController;
+use App\Http\Controllers\OrderTiketController;
 use App\Http\Controllers\RuteController;
 use App\Http\Controllers\TravelController;
+use App\Models\OrderTiket;
 use \App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -112,6 +114,8 @@ Route::middleware(['auth', 'role:penumpang'])->group(function () {
     Route::get('/travel', [TravelController::class, 'index'])->name('travel');
 
     Route::get('/detail/{id}', [DetailController::class, 'show'])->name('detail');
+    Route::post('/order/store', [OrderTiketController::class, 'store'])->name('order.store');
+
 });
 
 

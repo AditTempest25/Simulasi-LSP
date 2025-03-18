@@ -16,7 +16,7 @@ class Rute extends Model
 
     public function maskapai()
     {
-        return $this->belongsTo(Maskapai::class, 'id_maskapai');
+        return $this->belongsTo(Maskapai::class, 'id_maskapai', 'id_maskapai');
     }
 
     public function jadwalMaskapai()

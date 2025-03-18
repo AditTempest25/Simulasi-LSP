@@ -37,7 +37,7 @@
                                 penerbangan domestik maupun internasional.
                             </p>
                             <div class="flex gap-4">
-                                <a href="#"
+                                <a href="{{ route('travel') }}"
                                     class="inline-flex items-center px-6 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 lg:text-base">
                                     Cari Penerbangan
                                     <svg class="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20"
@@ -163,7 +163,7 @@
                     </h2>
                     <p class="mb-6 text-gray-500 md:text-lg dark:text-gray-400">Mulai petualangan Anda sekarang! Cari
                         penerbangan terbaik dan dapatkan penawaran spesial untuk anggota baru.</p>
-                    <a href="#"
+                    <a href="{{ route('travel') }}"
                         class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-blue-900">
                         Pesan Sekarang
                         <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
