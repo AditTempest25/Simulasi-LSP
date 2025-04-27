@@ -34,9 +34,9 @@ class OrderTiketController extends Controller
         $order = OrderTiket::create([
             'id_user' => Auth::id(),
             'id_jadwal' => $idJadwal,
-            'id_maskapai' => $idMaskapai, // Ambil dari rute
+            'id_maskapai' => $idMaskapai,
             'total_tiket' => $request->total_tiket,
-            'tanggal_transaksi' => Carbon::now(),
+            'tanggal_transaksi' => Carbon::now(), // biar semua waktu disimpan pakai UTC
             'status_verifikasi' => 'pending',
             'no_struk' => OrderTiket::generateNoStruk(),
         ]);
@@ -46,24 +46,35 @@ class OrderTiketController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        $request->validate([
-            'status_verifikasi' => 'required|in:verified,rejected',
-        ]);
-
         $order = OrderTiket::findOrFail($id);
-        $order->update(['status_verifikasi' => $request->status_verifikasi]);
 
-        return response()->json(['message' => 'Status verifikasi diperbarui', 'order' => $order]);
+        $statusLama = $order->status_verifikasi;
+        $statusBaru = $request->status_verifikasi;
+
+        $order->status_verifikasi = $statusBaru;
+        $order->save();
+
+        // Cek kalau status sebelumnya bukan verified, dan sekarang jadi verified
+        if ($statusLama !== 'verified' && $statusBaru === 'verified') {
+            $jadwal = JadwalMaskapai::find($order->id_jadwal);
+
+            if ($jadwal) {
+                $jadwal->kapasitas -= $order->total_tiket; // Kurangi kapasitas
+                $jadwal->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Status verifikasi berhasil diupdate.');
     }
 
+
     public function myTicket()
-{
-    $tickets = OrderTiket::where('id_user', Auth::id())
-        ->with(['jadwalMaskapai.rute', 'jadwalMaskapai.maskapai']) // Pakai jadwalMaskapai (bukan jadwal_maskapai)
-        ->orderBy('tanggal_transaksi', 'desc')
-        ->get();
+    {
+        $tickets = OrderTiket::where('id_user', Auth::id())
+            ->with(['jadwalMaskapai.rute', 'jadwalMaskapai.maskapai'])
+            ->orderBy('tanggal_transaksi', 'desc')
+            ->get();
 
-    return view('myticket', compact('tickets'));
-}
-
+        return view('myticket', compact('tickets'));
+    }
 }

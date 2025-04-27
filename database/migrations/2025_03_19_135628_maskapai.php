@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stasiun', function (Blueprint $table) {
-            $table->id('id_stasiun');
-            $table->string('nama_stasiun', 255);
+        Schema::create('maskapai', function (Blueprint $table) {
+            $table->bigIncrements('id_maskapai');
+            $table->string('nama_maskapai', 255);
+            $table->text('logo_maskapai');
+            $table->enum('kelas', ['Ekonomi', 'Bisnis', 'Eksekutif', 'Luxury']);    
+            $table->enum('status', ['Aktif', 'Tidak Aktif']);
             $table->timestamps();
         });
     }

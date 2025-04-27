@@ -11,6 +11,7 @@ use App\Http\Controllers\MaskapaiController;
 use App\Http\Controllers\OrderTiketController;
 use App\Http\Controllers\RuteController;
 use App\Http\Controllers\TravelController;
+use App\Http\Controllers\VerifikasiTiket;
 use App\Models\OrderTiket;
 use \App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -72,6 +73,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(
     Route::get('/jadwal-maskapai/{id}/edit', [JadwalMaskapaiController::class, 'edit'])->name('jadwal-maskapai.edit');
     Route::put('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'update'])->name('jadwal-maskapai.update');
     Route::delete('/jadwal-maskapai/{id}', [JadwalMaskapaiController::class, 'destroy'])->name('jadwal-maskapai.destroy');
+
+    // Verifikasi Tiket
+    Route::get('/verifikasi', [VerifikasiTiket::class, 'index'])->name('verifikasi');
+    Route::put('/verifikasi/approve/{id}', [VerifikasiTiket::class, 'approve'])->name('verifikasi.approve');
+    Route::put('/verifikasi/reject/{id}', [VerifikasiTiket::class, 'reject'])->name('verifikasi.reject');
 });
 
 Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->as('petugas.')->group(function () {
@@ -117,8 +123,6 @@ Route::middleware(['auth', 'role:penumpang'])->group(function () {
     Route::post('/order/store', [OrderTiketController::class, 'store'])->name('order.store');
 
     Route::get('/myticket', [OrderTiketController::class, 'myTicket'])->name('myticket');
-
-    
 });
 
 

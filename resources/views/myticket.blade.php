@@ -46,18 +46,23 @@
                                         {{ $ticket->jadwalMaskapai?->rute?->maskapai?->nama_maskapai ?? 'nama maskapai ditemukan' }}
                                     </td>
                                     <td class="py-2 px-4 border">
-                                        {{ $ticket->jadwalMaskapai?->rute?->kotaAsal?->nama_kota ?? 'kota asal tidak ditemukan' }} Ke
+                                        {{ $ticket->jadwalMaskapai?->rute?->kotaAsal?->nama_kota ?? 'kota asal tidak ditemukan' }}
+                                        Ke
                                         {{ $ticket->jadwalMaskapai?->rute?->kotaTujuan?->nama_kota ?? 'kota tujuan tidak ditemukan' }}
                                     </td>
-                                    <td class="py-2 px-4 border">{{ $ticket->total_tiket ?? 'total tiket tidak ditemukan' }}</td>
-                                    <td class="py-2 px-4 border">{{ \Carbon\Carbon::parse($ticket->tanggal_transaksi)->format('d M Y, H:i') }}</td>
                                     <td class="py-2 px-4 border">
-                                        <span class="px-3 py-1 text-white rounded
+                                        {{ $ticket->total_tiket ?? 'total tiket tidak ditemukan' }}</td>
+                                    <td class="py-2 px-4 border">
+                                        {{ \Carbon\Carbon::parse($ticket->tanggal_transaksi)}}
+                                    </td>
+                                    <td class="py-2 px-4 border">
+                                        <span
+                                            class="px-3 py-1 text-white rounded
                                             {{ $ticket->status_verifikasi == 'verified' ? 'bg-green-500' : ($ticket->status_verifikasi == 'rejected' ? 'bg-red-500' : 'bg-yellow-500') }}">
-                                            {{ ucfirst($ticket->status_verifikasi) }}
+                                            {{ ucfirst($ticket->status_verifikasi) }} 
                                         </span>
                                     </td>
-                                    
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -71,6 +76,45 @@
 
     <script>
         AOS.init();
+
+        // Profile dropdown functionality
+        const profileButton = document.getElementById('user-menu-button');
+        const profileMenu = document.querySelector('[aria-labelledby="user-menu-button"]');
+
+        // Profile dropdown toggle
+        if (profileButton && profileMenu) {
+            profileButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isExpanded = profileButton.getAttribute('aria-expanded') === 'true';
+                profileButton.setAttribute('aria-expanded', !isExpanded);
+                profileMenu.classList.toggle('hidden');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!profileButton.contains(e.target) && !profileMenu.contains(e.target)) {
+                    profileMenu.classList.add('hidden');
+                    profileButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // Mobile menu functionality
+        const mobileMenuButton = document.querySelector('[aria-controls="mobile-menu"]');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', function() {
+                // Toggle menu visibility
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+
+                // Toggle menu icons
+                const menuIcons = mobileMenuButton.querySelectorAll('svg');
+                menuIcons.forEach(icon => icon.classList.toggle('hidden'));
+            });
+        }
     </script>
 
 </body>

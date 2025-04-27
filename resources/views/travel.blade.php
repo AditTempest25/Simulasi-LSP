@@ -21,7 +21,7 @@
     <div class="bg-white">
         <x-navbar-penumpang></x-navbar-penumpang>
 
-        <section class="bg-white dark:bg-gray-900" data-aos="fade-up">
+        <section class="bg-white dark:bg-white" data-aos="fade-up">
             <div class="max-w-screen-xl px-4 py-8 mx-auto lg:px-12">
                 <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg dark:bg-gray-800 p-6">
                     <form class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -65,7 +65,7 @@
             </div>
         </section>
 
-        <div class="bg-brown-700 py-6" data-aos="fade-up">
+        <div class=" py-6" data-aos="fade-up">
             <h2 class="text-center text-black text-xl font-bold">
                 Gas Pesen Pesawat Sekarang Leeeeeeee!!!
             </h2>

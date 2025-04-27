@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('order_tiket', function (Blueprint $table) {
-            $table->dropForeign(['id_maskapai']); // Hapus foreign key
-
+        Schema::create('master_kotas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_kota')->unique();
+            $table->timestamps();
         });
     }
 
@@ -22,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('order_tiket', function (Blueprint $table) {
-            $table->foreign('id_maskapai')->references('id_maskapai')->on('maskapai'); // Tambahin lagi kalo rollback
-        });
+        //
     }
 };

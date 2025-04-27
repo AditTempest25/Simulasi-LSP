@@ -22,13 +22,13 @@
         <x-navbar-penumpang></x-navbar-penumpang>
 
         <!-- Hero Section -->
-        <section class="bg-white dark:bg-gray-900 mt-15" data-aos="fade-up">
+        <section class="bg-white dark:bg-white mt-15" data-aos="fade-up">
             <div class="relative max-w-screen-xl px-4 mx-auto overflow-hidden lg:px-12">
                 <div class="aspect-video w-full h-auto rounded-xl overflow-hidden shadow-2xl mt-8">
-                    <img src="{{ asset('storage/maskapai/maskapai4.jpg') }}" alt="Travel Hero Image"
+                    <img src="{{ asset('storage/maskapai/maskapai2.jpg') }}" alt="Travel Hero Image"
                         class="w-full h-full object-cover object-center" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-transparent flex items-center">
-                        <div class="max-w-2xl px-8 text-white">
+                        <div class="max-w-2xl px-8 text-white"> 
                             <h1 class="mb-4 text-3xl font-extrabold leading-tight md:text-4xl lg:text-5xl">
                                 Jelajahi Dunia dengan Mudah
                             </h1>
@@ -55,9 +55,9 @@
         </section>
 
         <!-- About Section -->
-        <section class="bg-white dark:bg-gray-900 mt-12" data-aos="fade-up">
+        <section class="bg-white dark:bg-white mt-12" data-aos="fade-up">
             <div class="items-center max-w-screen-xl gap-16 px-4 py-8 mx-auto lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
-                <div class="text-gray-500 sm:text-lg dark:text-gray-400">
+                <div class="text-gray-500 sm:text-lg dark:text-black">
                     <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">Kenapa Memilih
                         Kami?</h2>
                     <p class="mb-4">Sebagai platform pemesanan tiket pesawat terkemuka, kami menyediakan:</p>
@@ -69,16 +69,16 @@
                     </ul>
                     <p>Telah dipercaya oleh lebih dari 1 juta pelanggan untuk perjalanan mereka.</p>
                 </div>
-                <!-- Images tetap sama --> <img class="rounded-lg" src="{{ asset('storage/maskapai/maskapai3.jpeg') }}"
+                <!-- Images tetap sama --> <img class="rounded-lg mt-8" src="{{ asset('storage/maskapai/maskapai1.jpg') }}"
                     alt="">
             </div>
         </section>
 
         <!-- Fitur Section -->
-        <section class="bg-white dark:bg-gray-900" data-aos="fade-up">
+        <section class="bg-white dark:bg-white" data-aos="fade-up">
             <div class="max-w-screen-xl px-4 py-8 mx-auto sm:py-16 lg:px-6">
                 <div class="max-w-screen-md mb-8 lg:mb-16">
-                    <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">Kemudahan
+                    <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-black">Kemudahan
                         dalam Satu Platform</h2>
                     <p class="text-gray-500 sm:text-xl dark:text-gray-400">Nikmati pengalaman memesan tiket pesawat yang
                         mudah dan menyenangkan.</p>
@@ -90,7 +90,7 @@
                             class="flex items-center justify-center w-10 h-10 mb-4 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-900">
                             <i class="fa-solid fa-magnifying-glass text-blue-600"></i>
                         </div>
-                        <h3 class="mb-2 text-xl font-bold dark:text-white">Pencarian Mudah</h3>
+                        <h3 class="mb-2 text-xl dark:text-black">Pencarian Mudah</h3>
                         <p class="text-gray-500 dark:text-gray-400">Cari penerbangan sesuai preferensi Anda dengan
                             filter lengkap</p>
                     </div>
@@ -101,7 +101,7 @@
                             class="flex items-center justify-center w-10 h-10 mb-4 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-900">
                             <i class="fa-solid fa-credit-card text-blue-600"></i>
                         </div>
-                        <h3 class="mb-2 text-xl font-bold dark:text-white">Pembayaran Aman</h3>
+                        <h3 class="mb-2 text-xl dark:text-black">Pembayaran Aman</h3>
                         <p class="text-gray-500 dark:text-gray-400">Sistem pembayaran terenkripsi dengan berbagai metode
                             pembayaran</p>
                     </div>
@@ -112,7 +112,7 @@
                             class="flex items-center justify-center w-10 h-10 mb-4 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-900">
                             <i class="fa-solid fa-headset text-blue-600"></i>
                         </div>
-                        <h3 class="mb-2 text-xl font-bold dark:text-white">24/7 Support</h3>
+                        <h3 class="mb-2 text-xl dark:text-black">24/7 Support</h3>
                         <p class="text-gray-500 dark:text-gray-400">Tim customer service siap membantu kapan saja</p>
                     </div>
 
@@ -122,7 +122,7 @@
                             class="flex items-center justify-center w-10 h-10 mb-4 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-900">
                             <i class="fa-solid fa-tag text-blue-600"></i>
                         </div>
-                        <h3 class="mb-2 text-xl font-bold dark:text-white">Harga Terbaik</h3>
+                        <h3 class="mb-2 text-xl dark:text-black">Harga Terbaik</h3>
                         <p class="text-gray-500 dark:text-gray-400">Garansi harga termurah dengan price match promise
                         </p>
                     </div>
@@ -133,7 +133,7 @@
                             class="flex items-center justify-center w-10 h-10 mb-4 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-900">
                             <i class="fa-solid fa-clock text-blue-600"></i>
                         </div>
-                        <h3 class="mb-2 text-xl font-bold dark:text-white">Konfirmasi Instan</h3>
+                        <h3 class="mb-2 text-xl dark:text-black">Konfirmasi Instan</h3>
                         <p class="text-gray-500 dark:text-gray-400">Dapatkan e-ticket langsung setelah pembayaran</p>
                     </div>
 
@@ -143,7 +143,7 @@
                             class="flex items-center justify-center w-10 h-10 mb-4 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-900">
                             <i class="fa-solid fa-plane text-blue-600"></i>
                         </div>
-                        <h3 class="mb-2 text-xl font-bold dark:text-white">Banyak Maskapai</h3>
+                        <h3 class="mb-2 text-xl dark:text-black">Banyak Maskapai</h3>
                         <p class="text-gray-500 dark:text-gray-400">Partner dengan 100+ maskapai penerbangan ternama</p>
                     </div>
                 </div>
@@ -151,13 +151,13 @@
         </section>
 
         <!-- CTA Section -->
-        <section class="bg-white dark:bg-gray-900" data-aos="fade-right">
+        <section class="bg-white " data-aos="fade-right">
             <div
                 class="items-center max-w-screen-xl gap-8 px-4 py-8 mx-auto xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
                 <img class="w-full dark:hidden rounded-md" src="{{ asset('storage/maskapai/maskapai2.jpeg') }}"
                     alt="Travel Illustration">
                 <div class="mt-4 md:mt-0">
-                    <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">Siap Terbang?
+                    <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-black">Siap Terbang?
                     </h2>
                     <p class="mb-6 text-gray-500 md:text-lg dark:text-gray-400">Mulai petualangan Anda sekarang! Cari
                         penerbangan terbaik dan dapatkan penawaran spesial untuk anggota baru.</p>

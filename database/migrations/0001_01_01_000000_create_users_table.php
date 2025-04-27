@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();  // This will create an 'id' column as the primary key.
+            $table->id();  
             $table->string('name');
             $table->string('email')->unique();
             $table->date('tanggal_lahir')->nullable();
@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['admin', 'penumpang', 'petugas'])->default('penumpang');
             $table->string('remember_token')->nullable();;
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

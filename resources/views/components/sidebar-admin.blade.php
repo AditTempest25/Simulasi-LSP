@@ -53,6 +53,12 @@
             <i class="fa-solid fa-calendar"></i> <span>Jadwal Penerbangan</span>
         </a>
 
+        <a href="{{ route('admin.verifikasi') }}"
+            class="flex items-center space-x-2 text-white p-2 rounded-lg transition 
+            {{ request()->routeIs('admin.verifikasi') ? 'bg-indigo-700' : 'hover:bg-indigo-500' }}">
+            <i class="fa-solid fa-user-check"></i> <span>Verifikasi</span>
+        </a>
+
     </nav>
 
     <div class="p-4">

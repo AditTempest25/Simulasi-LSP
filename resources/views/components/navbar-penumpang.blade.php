@@ -59,7 +59,7 @@
             <a href="{{ route('travel') }}"
                 class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
                 aria-current="page">Travel</a>
-            <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+            <a href="{{ route('myticket') }}" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
                 aria-current="page">My Ticket</a>
             <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
                 aria-current="page">History</a>

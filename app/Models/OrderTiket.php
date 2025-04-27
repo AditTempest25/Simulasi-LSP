@@ -12,7 +12,7 @@ class OrderTiket extends Model
 
     protected $primaryKey = "id_order";
     protected $table = 'order_tiket';
-    protected $fillable = ['id_user', 'id_jadwal', 'total_tiket', 'tanggal_transaksi', 'status_verifikasi', 'no_struk', 'id_maskapai', 'id_jadwal'];
+    protected $fillable = ['id_user', 'id_jadwal', 'total_tiket', 'tanggal_transaksi', 'status_verifikasi', 'no_struk', 'id_maskapai'];
 
     public static function generateNoStruk()
     {
@@ -35,4 +35,9 @@ class OrderTiket extends Model
     {
         return $this->belongsTo(JadwalMaskapai::class, 'id_jadwal', 'id_jadwal');
     }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }   
 }

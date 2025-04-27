@@ -12,15 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_tiket', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_order')->primary();
+            $table->id('id_order');
+            $table->string('no_struk')->unique();
             $table->foreignId('id_user')->constrained('users', 'id')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('id_rute')->constrained('rute', 'id_rute')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('id_maskapai')->constrained('maskapai', 'id_maskapai')->onDelete('cascade')->onUpdate('cascade');
-            $table->date('tanggal_transaksi');
+            $table->foreignId('id_jadwal')->constrained('jadwal_maskapai', 'id_jadwal')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('id_maskapai');
+            $table->integer('total_tiket');
+            $table->dateTimeTz('tanggal_transaksi');
             $table->enum('status_verifikasi', ['pending', 'verified', 'rejected'])->default('pending');
             $table->timestamps();
         });
-
     }
 
     /**

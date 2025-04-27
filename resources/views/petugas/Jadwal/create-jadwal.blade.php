@@ -43,7 +43,7 @@
                 <div class="mb-4">
                     <label for="id_maskapai" class="block text-gray-700 font-semibold mb-2">Maskapai:</label>
                     <input type="text" id="id_maskapai" readonly
-                           class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           class="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-[#D9D9D9]">
                 </div>
                 <!-- Waktu Berangkat -->
                 <div class="mb-4">

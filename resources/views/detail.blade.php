@@ -30,24 +30,28 @@
                 <div>
                     <h2 class="text-2xl font-bold text-gray-900">{{ $detail->rute->maskapai->nama_maskapai }}</h2>
                     <p class="text-gray-600 text-lg mt-2 font-bold">Price:
-                        {{ number_format($detail->harga, 0, ',', '.') }}</p>
+                        <span id="harga_satuan" data-harga="{{ $detail->harga }}">
+                            {{ number_format($detail->harga, 0, ',', '.') }}
+                        </span>
+                    </p>
+
                     <p class="text-gray-600 text-md mt-2 font-bold">Kapasitas: {{ $detail->kapasitas }}</p>
 
                     <div class="mt-4">
                         <label class="block font-medium text-gray-700">Rute :</label>
                         <input type="text"
                             value="{{ $detail->rute->kotaAsal->nama_kota }} → {{ $detail->rute->kotaTujuan->nama_kota }}"
-                            class="mt-1 w-full p-2 border rounded-lg" readonly>
+                            class="mt-1 w-full p-2 border rounded-lg bg-[#D9D9D9] font-bold" readonly>
                     </div>
                     <div class="mt-4">
                         <label class="block font-medium text-gray-700">Jam Berangkat :</label>
                         <input type="text" value="{{ $detail->waktu_berangkat }}"
-                            class="mt-1 w-full p-2 border rounded-lg" readonly>
+                            class="mt-1 w-full p-2 border rounded-lg bg-[#D9D9D9] font-bold" readonly>
                     </div>
                     <div class="mt-4">
                         <label class="block font-medium text-gray-700">Jam Tiba</label>
                         <input type="text" value="{{ $detail->waktu_tiba }}"
-                            class="mt-1 w-full p-2 border rounded-lg" readonly>
+                            class="mt-1 w-full p-2 border rounded-lg bg-[#D9D9D9] font-bold" readonly>
                     </div>
                     <form action="{{ route('order.store') }}" method="POST">
                         @csrf
@@ -55,8 +59,14 @@
 
                         <div class="mt-4">
                             <label class="block font-medium text-gray-700">Total Tiket</label>
-                            <input type="number" name="total_tiket" value="1" min="1"
+                            <input type="number" id="total_tiket" name="total_tiket" value="1" min="1"
                                 class="mt-1 w-full p-2 border rounded-lg">
+                        </div>
+                        <div class="mt-4">
+                            <label class="block font-medium text-gray-700">Total Harga</label>
+                            <input type="text" id="total_harga_display"
+                                class="mt-1 w-full p-2 border rounded-lg bg-[#D9D9D9] font-bold" readonly>
+                            <input type="hidden" id="total_harga" name="total_harga">
                         </div>
 
                         <button type="submit"
@@ -74,14 +84,14 @@
                         Kembali
                     </a>
                     @if ($errors->any())
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -89,6 +99,23 @@
 
     <script>
         AOS.init();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const tiketInput = document.getElementById('total_tiket');
+            const totalHargaDisplay = document.getElementById('total_harga_display');
+            const totalHargaHidden = document.getElementById('total_harga');
+            const harga = parseInt(document.getElementById('harga_satuan').dataset.harga);
+
+            function updateHarga() {
+                const jumlah = parseInt(tiketInput.value) || 0;
+                const total = jumlah * harga;
+                totalHargaDisplay.value = total.toLocaleString('id-ID');
+                totalHargaHidden.value = total;
+            }
+
+            tiketInput.addEventListener('input', updateHarga);
+            updateHarga();
+        });
     </script>
 
 </body>

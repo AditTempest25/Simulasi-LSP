@@ -23,14 +23,13 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->date('tanggal_pergi');
             $table->timestamps();
-        });
-    }
+        });    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('rute');
+        //
     }
 };
