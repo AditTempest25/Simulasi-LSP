@@ -61,9 +61,9 @@ class OrderTiketController extends Controller
     public function myTicket()
     {
         $tickets = OrderTiket::where('id_user', Auth::id())
-            ->with(['jadwalMaskapai.rute', 'jadwalMaskapai.maskapai'])
+            ->with(['jadwalMaskapai.rute.kotaAsal', 'jadwalMaskapai.rute.kotaTujuan', 'jadwalMaskapai.rute.maskapai'])
             ->orderBy('tanggal_transaksi', 'desc')
-            ->get();
+            ->paginate(10);
 
         return view('myticket', compact('tickets'));
     }

@@ -11,15 +11,12 @@ class History extends Controller
 {
     public function index()
     {
-        // Get only verified tickets for the authenticated user
         $tickets = OrderDetail::where('id_user', Auth::id())
-            ->with(['orderTiket' => function($query) {
+            ->whereHas('orderTiket', function ($query) {
                 $query->where('status_verifikasi', 'verified');
-            }])
-            ->get()
-            ->filter(function($item) {
-                return $item->orderTiket !== null;
-            });
+            })
+            ->with('orderTiket')
+            ->paginate(10); 
 
         return view('history', compact('tickets'));
     }
@@ -33,9 +30,8 @@ class History extends Controller
 
         $pdf = Pdf::loadView('ticket-pdf', compact('ticket'));
 
-        return $pdf->stream('ticket-'.$ticket->orderTiket->no_struk.'.pdf');
+        return $pdf->stream('ticket-' . $ticket->orderTiket->no_struk . '.pdf');
         // Alternatively, to download:
         // return $pdf->download('ticket-'.$ticket->orderTiket->no_struk.'.pdf');
     }
-
 }

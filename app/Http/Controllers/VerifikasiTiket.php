@@ -10,8 +10,10 @@ class VerifikasiTiket extends Controller
 {
     public function index()
     {
-        $orderTiket = OrderTiket::paginate(10); 
-        return view('admin.verifikasi', compact('orderTiket'));
+        $orderTiket = OrderTiket::orderByRaw("FIELD(status_verifikasi, 'pending', 'verified', 'rejected')")
+        ->orderByDesc('tanggal_transaksi') 
+        ->paginate(10);
+            return view('admin.verifikasi', compact('orderTiket'));
     }
 
     public function approve($id)

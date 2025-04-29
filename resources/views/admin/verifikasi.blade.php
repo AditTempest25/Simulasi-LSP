@@ -53,7 +53,7 @@
                     <tbody class="bg-white border border-gray-200 text-center">
                         @foreach ($orderTiket as $index => $ot)
                             <tr>
-                                <td class="px-6 py-4 font-medium text-gray-900">{{ $index + 1 }}</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">{{ ($orderTiket->currentPage() - 1) * $orderTiket->perPage() + $loop->iteration }}</td>
                                 <td class="px-6 py-4">{{ $ot->no_struk }}</td>
                                 <td class="px-6 py-4">{{ $ot->users->name }}</td>
                                 <td class="px-6 py-4">{{ $ot->jadwalMaskapai?->rute?->tanggal_pergi ?? '-' }} </td>
@@ -96,14 +96,14 @@
                                         <span class="text-gray-400">Selesai</span>
                                     @endif
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <div class="mt-4 flex justify-center">
+                    {{ $orderTiket->links('vendor.pagination.tailwind') }}
+                </div>
             </div>
-
-
         </main>
 </body>
 

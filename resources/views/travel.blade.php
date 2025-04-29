@@ -116,19 +116,19 @@
                     <h2 class="text-3xl font-bold text-blue-700 mb-8">🏆 Maskapai Terfavorit 🏆</h2>
                     <div class="flex flex-wrap justify-center gap-8">
                         <div class="bg-white shadow-md rounded-lg p-6 w-60 hover:scale-105 transition-transform">
-                            <img src="{{ asset('storage/maskapai/garuda.png') }}" alt="Garuda"
+                            <img src="{{ asset('storage/maskapai/garuda.jpeg') }}" alt="Garuda"
                                 class="w-20 h-20 mx-auto mb-4">
                             <h3 class="text-lg font-bold text-gray-800">Garuda Indonesia</h3>
                             <p class="text-gray-500 text-sm">★★★★★</p>
                         </div>
                         <div class="bg-white shadow-md rounded-lg p-6 w-60 hover:scale-105 transition-transform">
-                            <img src="{{ asset('storage/maskapai/batik.png') }}" alt="Batik Air"
+                            <img src="{{ asset('storage/maskapai/batik.jpeg') }}" alt="Batik Air"
                                 class="w-20 h-20 mx-auto mb-4">
                             <h3 class="text-lg font-bold text-gray-800">Batik Air</h3>
                             <p class="text-gray-500 text-sm">★★★★☆</p>
                         </div>
                         <div class="bg-white shadow-md rounded-lg p-6 w-60 hover:scale-105 transition-transform">
-                            <img src="{{ asset('storage/maskapai/citilink.png') }}" alt="Citilink"
+                            <img src="{{ asset('storage/maskapai/citilink.jpeg') }}" alt="Citilink"
                                 class="w-20 h-20 mx-auto mb-4">
                             <h3 class="text-lg font-bold text-gray-800">Citilink</h3>
                             <p class="text-gray-500 text-sm">★★★★☆</p>

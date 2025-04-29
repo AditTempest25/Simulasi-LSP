@@ -17,84 +17,93 @@
 
 <body>
     <div class="bg-white">
-        <div class="max-w-6xl mx-auto px-4 py-8">
-            <!-- Product Detail Card -->
-            <div class="bg-white p-6 rounded-lg shadow-md grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Product Image -->
-                <div class="flex justify-center">
-                    <img src="{{ asset('storage/' . $detail->rute->maskapai->logo_maskapai) }}" alt="Product Image"
-                        class="rounded-lg shadow-lg">
-                </div>
-
-                <!-- Product Details -->
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-900">{{ $detail->rute->maskapai->nama_maskapai }}</h2>
-                    <p class="text-gray-600 text-lg mt-2 font-bold">Price:
-                        <span id="harga_satuan" data-harga="{{ $detail->harga }}">
-                            {{ number_format($detail->harga, 0, ',', '.') }}
-                        </span>
-                    </p>
-
-                    <p class="text-gray-600 text-md mt-2 font-bold">Kapasitas: {{ $detail->kapasitas }}</p>
-
-                    <div class="mt-4">
-                        <label class="block font-medium text-gray-700">Rute :</label>
-                        <input type="text"
-                            value="{{ $detail->rute->kotaAsal->nama_kota }} → {{ $detail->rute->kotaTujuan->nama_kota }}"
-                            class="mt-1 w-full p-2 border rounded-lg bg-[#D9D9D9] font-bold" readonly>
+        <div class="bg-gray-100 min-h-screen py-10">
+            <div class="max-w-6xl mx-auto px-4">
+                <!-- Card -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Image -->
+                    <div class="flex justify-center items-center">
+                        <img src="{{ asset('storage/' . $detail->rute->maskapai->logo_maskapai) }}"
+                            alt="Logo Maskapai"
+                            class="rounded-xl shadow-lg w-full max-w-[300px] object-contain">
                     </div>
-                    <div class="mt-4">
-                        <label class="block font-medium text-gray-700">Jam Berangkat :</label>
-                        <input type="text" value="{{ $detail->waktu_berangkat }}"
-                            class="mt-1 w-full p-2 border rounded-lg bg-[#D9D9D9] font-bold" readonly>
-                    </div>
-                    <div class="mt-4">
-                        <label class="block font-medium text-gray-700">Jam Tiba</label>
-                        <input type="text" value="{{ $detail->waktu_tiba }}"
-                            class="mt-1 w-full p-2 border rounded-lg bg-[#D9D9D9] font-bold" readonly>
-                    </div>
-                    <form action="{{ route('order.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="id_jadwal" value="{{ $detail->id_jadwal }}">
 
-                        <div class="mt-4">
-                            <label class="block font-medium text-gray-700">Total Tiket</label>
-                            <input type="number" id="total_tiket" name="total_tiket" value="1" min="1" max="{{ $detail->kapasitas }}"
-                                class="mt-1 w-full p-2 border rounded-lg">
-                        </div>
-                        <div class="mt-4">
-                            <label class="block font-medium text-gray-700">Total Harga</label>
-                            <input type="text" id="total_harga_display"
-                                class="mt-1 w-full p-2 border rounded-lg bg-[#D9D9D9] font-bold" readonly>
-                            <input type="hidden" id="total_harga" name="total_harga">
+                    <!-- Info -->
+                    <div class="space-y-4">
+                        <h2 class="text-3xl font-bold text-gray-900">{{ $detail->rute->maskapai->nama_maskapai }}</h2>
+
+                        <div class="text-lg font-semibold text-gray-700">
+                            Harga:
+                            <span id="harga_satuan" data-harga="{{ $detail->harga }}" class="text-blue-600 font-bold">
+                                Rp {{ number_format($detail->harga, 0, ',', '.') }}
+                            </span>
                         </div>
 
-                        <button type="submit"
-                            class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mt-5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 18 21">
-                                <path
-                                    d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                            </svg>
-                            Buy now
-                        </button>
-                    </form>
-                    <a href="{{ route('travel') }}"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm mt-5 px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Kembali
-                    </a>
-                    @if ($errors->any())
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 mt-3">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                        <p class="text-gray-600 font-medium">Kapasitas: {{ $detail->kapasitas }} kursi</p>
+
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1 font-medium">Rute</label>
+                            <input type="text" readonly
+                                value="{{ $detail->rute->kotaAsal->nama_kota }} → {{ $detail->rute->kotaTujuan->nama_kota }}"
+                                class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 font-semibold text-sm">
                         </div>
-                    @endif
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1 font-medium">Jam Berangkat</label>
+                                <input type="text" readonly value="{{ $detail->waktu_berangkat }}"
+                                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 font-semibold text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1 font-medium">Jam Tiba</label>
+                                <input type="text" readonly value="{{ $detail->waktu_tiba }}"
+                                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 font-semibold text-sm">
+                            </div>
+                        </div>
+
+                        <form action="{{ route('order.store') }}" method="POST" class="space-y-4 mt-6">
+                            @csrf
+                            <input type="hidden" name="id_jadwal" value="{{ $detail->id_jadwal }}">
+
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1 font-medium">Total Tiket</label>
+                                <input type="number" id="total_tiket" name="total_tiket"
+                                    value="1" min="1" max="{{ $detail->kapasitas }}"
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm text-gray-600 mb-1 font-medium">Total Harga</label>
+                                <input type="text" id="total_harga_display" readonly
+                                    class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 font-bold text-sm">
+                                <input type="hidden" id="total_harga" name="total_harga">
+                            </div>
+
+                            <button type="submit"
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-5 rounded-lg font-semibold transition duration-200 shadow">
+                                <i class="fa-solid fa-cart-shopping mr-2"></i>Beli Sekarang
+                            </button>
+                        </form>
+
+                        <a href="{{ route('travel') }}"
+                            class="block text-center bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-5 rounded-lg font-semibold transition duration-200 mt-4">
+                            ← Kembali
+                        </a>
+
+                        @if ($errors->any())
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4">
+                                <ul class="text-sm list-disc list-inside">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
     <script>
