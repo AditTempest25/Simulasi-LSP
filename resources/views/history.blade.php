@@ -59,7 +59,7 @@
                                         {{ \Carbon\Carbon::parse($ticket->tanggal_transaksi)->format('d M Y') }}</td>
                                     <td class="py-3 px-4">
                                         <a href="{{ route('ticket-pdf', $ticket->id_order_detail) }}"
-                                            class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                            class="bg-red-500 text-white font-bold py-2 px-4 rounded inline-flex items-center">
                                             <i class="fas fa-file-pdf mr-2"></i> View PDF
                                         </a>
                                     </td>

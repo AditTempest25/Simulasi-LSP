@@ -24,7 +24,9 @@
             <h1 class="text-3xl font-bold text-center mb-5">My Ticket</h1>
 
             @if ($tickets->isEmpty())
-                <p class="text-center text-gray-500">Belum ada tiket yang dipesan.</p>
+                <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4">
+                    <p>Anda belum pernah memesan tiket</p>
+                </div>
             @else
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white border border-gray-200">
