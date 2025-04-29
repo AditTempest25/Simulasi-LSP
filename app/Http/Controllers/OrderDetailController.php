@@ -33,14 +33,15 @@ class OrderDetailController extends Controller
         // Simpan OrderDetail berdasarkan data dari OrderTiket
         $orderDetail = OrderDetail::create([
             'id_order'      => $orderTiket->id_order,
-            'id_user'       => $orderTiket->id_user, 
-            'nama_maskapai' => $orderTiket->jadwal->rute->maskapai->nama_maskapai, 
+            'id_user'       => $orderTiket->id_user,
+            'name'          => $orderTiket->user->name,
+            'nama_maskapai' => $orderTiket->jadwal->rute->maskapai->nama_maskapai,
             'waktu_berangkat' => $orderTiket->jadwal->waktu_berangkat,
             'waktu_tiba'    => $orderTiket->jadwal->waktu_tiba,
             'kota_asal'     => $orderTiket->jadwal->rute->kota_asal,
             'kota_tujuan'   => $orderTiket->jadwal->rute->kota_tujuan,
             'total_tiket'   => $orderTiket->total_tiket,
-            'total_harga'   => $orderTiket->total_tiket * $orderTiket->jadwal->harga, 
+            'total_harga'   => $orderTiket->total_tiket * $orderTiket->jadwal->harga,
             'tanggal_transaksi' => $orderTiket->tanggal_transaksi,
         ]);
 
