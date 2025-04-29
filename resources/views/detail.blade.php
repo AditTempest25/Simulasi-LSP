@@ -59,7 +59,7 @@
 
                         <div class="mt-4">
                             <label class="block font-medium text-gray-700">Total Tiket</label>
-                            <input type="number" id="total_tiket" name="total_tiket" value="1" min="1"
+                            <input type="number" id="total_tiket" name="total_tiket" value="1" min="1" max="{{ $detail->kapasitas }}"
                                 class="mt-1 w-full p-2 border rounded-lg">
                         </div>
                         <div class="mt-4">
@@ -84,7 +84,7 @@
                         Kembali
                     </a>
                     @if ($errors->any())
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 mt-3">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>

@@ -19,16 +19,17 @@
 <body class="flex flex-col min-h-screen">
 
     <div class="bg-white flex-1">
+
         <x-navbar-penumpang></x-navbar-penumpang>
 
         <!-- Hero Section -->
         <section class="bg-white dark:bg-white mt-15" data-aos="fade-up">
             <div class="relative max-w-screen-xl px-4 mx-auto overflow-hidden lg:px-12">
                 <div class="aspect-video w-full h-auto rounded-xl overflow-hidden shadow-2xl mt-8">
-                    <img src="{{ asset('storage/maskapai/maskapai2.jpg') }}" alt="Travel Hero Image"
+                    <img src="{{ asset('storage/maskapai/KKK-13.png') }}" alt="Travel Hero Image"
                         class="w-full h-full object-cover object-center" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-transparent flex items-center">
-                        <div class="max-w-2xl px-8 text-white"> 
+                        <div class="max-w-2xl px-8 text-white">
                             <h1 class="mb-4 text-3xl font-extrabold leading-tight md:text-4xl lg:text-5xl">
                                 Jelajahi Dunia dengan Mudah
                             </h1>
@@ -69,8 +70,7 @@
                     </ul>
                     <p>Telah dipercaya oleh lebih dari 1 juta pelanggan untuk perjalanan mereka.</p>
                 </div>
-                <!-- Images tetap sama --> <img class="rounded-lg mt-8" src="{{ asset('storage/maskapai/maskapai1.jpg') }}"
-                    alt="">
+                <img class="rounded-lg mt-8 ms-44" src="{{ asset('storage/maskapai/flight.png') }}" alt="">
             </div>
         </section>
 

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="flex h-screen">
+    <div class="flex flex-col lg:flex-row h-full">
         <!-- Sidebar -->
         <x-sidebar-admin></x-sidebar-admin>
 
@@ -34,7 +34,7 @@
                     @endif
                 </form>
             </div>
-            
+
             <div class="mb-6">
                 <a href="{{ route('admin.rute.create') }}"
                     class="px-4 py-2 bg-blue-700 rounded-md text-white hover:bg-blue-800 inline-flex items-center">

@@ -13,14 +13,14 @@
 </head>
 
 <body>
-    <div class="flex h-screen">
+    <div class="flex flex-col lg:flex-row h-full">
         <!-- Sidebar -->
         <x-sidebar-admin></x-sidebar-admin>
 
         <!-- Main Content -->
         <main class="flex-1 p-6">
 
-            <div class="relative overflow-x-auto">
+            <div class="relative">
                 <table class="min-w-full text-sm text-left text-gray-500">
                     <thead class="text-xs uppercase bg-blue-500 text-white text-center">
                         <tr>
@@ -57,7 +57,9 @@
                                 <td class="px-6 py-4">{{ $ot->no_struk }}</td>
                                 <td class="px-6 py-4">{{ $ot->users->name }}</td>
                                 <td class="px-6 py-4">{{ $ot->jadwalMaskapai?->rute?->tanggal_pergi ?? '-' }} </td>
-                                <td class="px-6 py-4">{{ $ot->tanggal_transaksi }}</td>
+                                <td class="px-6 py-4">
+                                    {{ \Carbon\Carbon::parse($ot->tanggal_transaksi)->format('d-m-Y H:i') }}
+                                </td>
                                 <td class="px-6 py-4">{{ $ot->total_tiket }}</td>
                                 <td class="px-6 py-4">
                                     @if ($ot->status_verifikasi == 'pending')
@@ -71,15 +73,18 @@
                                 <td class="px-6 py-4">
                                     @if ($ot->status_verifikasi == 'pending')
                                         <div class="flex justify-center gap-2">
-                                            <form action="{{ route('admin.verifikasi.approve', $ot->id_order) }}" method="POST">
+                                            <form action="{{ route('admin.verifikasi.approve', $ot->id_order) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit" class="text-green-500 hover:text-green-700">
+                                                <button type="submit" class="text-green-500 hover:text-green-700"
+                                                    onclick="return confirm('Yakin mau Approve?')">
                                                     <i class="fas fa-check"></i>
                                                 </button>
                                             </form>
-                                
-                                            <form action="{{ route('admin.verifikasi.reject', $ot->id_order) }}" method="POST">
+
+                                            <form action="{{ route('admin.verifikasi.reject', $ot->id_order) }}"
+                                                method="POST" onclick="return confirm('Yakin mau Reject?')">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit" class="text-red-500 hover:text-red-700">
@@ -91,7 +96,7 @@
                                         <span class="text-gray-400">Selesai</span>
                                     @endif
                                 </td>
-                                
+
                             </tr>
                         @endforeach
                     </tbody>

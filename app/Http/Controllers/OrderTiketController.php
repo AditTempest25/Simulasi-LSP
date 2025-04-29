@@ -54,16 +54,6 @@ class OrderTiketController extends Controller
         $order->status_verifikasi = $statusBaru;
         $order->save();
 
-        // Cek kalau status sebelumnya bukan verified, dan sekarang jadi verified
-        if ($statusLama !== 'verified' && $statusBaru === 'verified') {
-            $jadwal = JadwalMaskapai::find($order->id_jadwal);
-
-            if ($jadwal) {
-                $jadwal->kapasitas -= $order->total_tiket; // Kurangi kapasitas
-                $jadwal->save();
-            }
-        }
-
         return redirect()->back()->with('success', 'Status verifikasi berhasil diupdate.');
     }
 

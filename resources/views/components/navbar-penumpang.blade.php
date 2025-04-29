@@ -16,8 +16,8 @@
                             class="px-3 py-2 text-sm font-medium text-white
                             {{ request()->routeIs('myticket') ? 'rounded-md bg-gray-900' : 'hover:rounded-md hover:bg-gray-900' }}"
                             aria-current="page">My Ticket</a>
-                        <a href="#" class="px-3 py-2 text-sm font-medium text-white"
-                            aria-current="page">History</a>
+                        {{-- <a href="#" class="px-3 py-2 text-sm font-medium text-white"
+                            aria-current="page">History</a> --}}
                     </div>
                 </div>
             </div>
@@ -39,8 +39,8 @@
                         id="user-menu" role="menu" aria-labelledby="user-menu-button" tabindex="-1">
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
                             id="user-menu-item-0">Your Profile</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                            id="user-menu-item-1">Settings</a>
+                        {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                            id="user-menu-item-1">Settings</a> --}}
                         <a href="{{ route('logout') }}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-500 hover:text-white"
                             role="menuitem" tabindex="-1" id="user-menu-item-2">Log out</a>
@@ -61,8 +61,8 @@
                 aria-current="page">Travel</a>
             <a href="{{ route('myticket') }}" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
                 aria-current="page">My Ticket</a>
-            <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-                aria-current="page">History</a>
+            {{-- <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                aria-current="page">History</a> --}}
         </div>
     </div>
 </nav>

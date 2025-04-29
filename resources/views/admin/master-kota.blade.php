@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="flex h-screen">
+    <div class="flex flex-col lg:flex-row h-full">
         <!-- Sidebar -->
         <x-sidebar-admin></x-sidebar-admin>
 

@@ -13,7 +13,13 @@
 </head>
 
 <body>
-    <div class="flex h-screen">
+    <div class="flex flex-col lg:flex-row h-full">
+
+        <!-- Hamburger Button -->
+        <button id="hamburgerBtn" class="md:hidden p-4 text-2xl absolute top-4 left-4 z-50">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
         <!-- Sidebar -->
         <x-sidebar-admin></x-sidebar-admin>
 
@@ -35,10 +41,15 @@
                         </a>
                     @endif
                 </form>
-
             </div>
 
             <div class="relative overflow-x-auto mt-6">
+                <div class="mb-6">
+                    <a href="{{ route('admin.data-pengguna.create') }}"
+                        class="px-4 py-2 bg-blue-700 rounded-md text-white hover:bg-blue-800 inline-flex items-center">
+                        <i class="fa-solid fa-plus me-2"></i>Tambah Pengguna
+                    </a>
+                </div>
                 <table class="w-full text-sm text-left rtl:text-right text-white dark:text-white">
                     <thead
                         class="text-xs text-white uppercase bg-blue-500 dark:bg-blue-500 dark:text-white text-center">
@@ -78,6 +89,11 @@
                                 <td class="px-6 py-4">{{ $u->alamat }}</td>
                                 <td class="px-6 py-4">{{ $u->jenis_kelamin }}</td>
                                 <td class="px-6 py-4">
+                                    <!-- Tombol Edit -->
+                                    <a href="{{ route('admin.data-pengguna.edit', $u->id) }}"
+                                        class="px-2 py-1 text-white bg-yellow-500 rounded-md hover:bg-yellow-600">
+                                        <i class="fa-solid fa-pen-to-square me-2"></i>Edit
+                                    </a>
                                     <!-- Tombol Delete -->
                                     <form action="{{ route('admin.data-pengguna.destroy', $u->id) }}" method="POST"
                                         class="inline-block" onsubmit="return confirm('Yakin hapus data?');">
@@ -99,6 +115,16 @@
                 {{ $penumpang->links() }}
             </div>
         </div>
+    </div>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+        // Ketika tombol hamburger diklik, toggle sidebar
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full'); // Toggle sidebar hide/show
+        });
+    </script>
 </body>
 
 </html>

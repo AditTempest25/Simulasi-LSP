@@ -25,6 +25,12 @@ class VerifikasiTiket extends Controller
             'status_verifikasi' => 'verified',
         ]);
 
+        $jadwal = $orderTiket->jadwalMaskapai; // relasi
+        if ($jadwal) {
+            $jadwal->kapasitas -= $orderTiket->total_tiket;
+            $jadwal->save();
+        }
+
         return back()->with('success', 'Tiket berhasil di-approve.');
     }
 
@@ -33,7 +39,7 @@ class VerifikasiTiket extends Controller
         $orderTiket = OrderTiket::findOrFail($id);
 
         if ($orderTiket->status_verifikasi !== 'pending') {
-            return back()->with('error', 'Tiket sudah diverifikasi, tidak bisa diubah lagi.');
+            return back()->with('error', 'Tiket sudah reject, tidak bisa diubah lagi.');
         }
 
         $orderTiket->update([

@@ -13,7 +13,13 @@
 </head>
 
 <body>
-    <div class="flex h-screen">
+    <div class="flex flex-col lg:flex-row h-full">
+
+        <!-- Hamburger Button -->
+        <button id="hamburgerBtn" class="md:hidden p-4 text-2xl absolute top-4 left-4 z-50">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
         <!-- Sidebar -->
         <x-sidebar-admin></x-sidebar-admin>
 
@@ -50,8 +56,9 @@
                     <a href="{{ route('admin.maskapai') }}">
                         <span class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Total Pesawat
                             Aktif</span>
-                        </a>
-                        <i class="fa-solid fa-plane-up"></i>                    <div class="flex items-center justify-between">
+                    </a>
+                    <i class="fa-solid fa-plane-up"></i>
+                    <div class="flex items-center justify-between">
                         <span class="mt-5 text-3xl font-bold text-white dark:text-white">{{ $totalPesawat }}</span>
                     </div>
                 </div>
@@ -61,8 +68,8 @@
                     <a href="{{ route('admin.data-pengguna') }}">
                         <span class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Data
                             Pengguna</span>
-                        </a>
-                        <i class="fa-solid fa-users"></i>
+                    </a>
+                    <i class="fa-solid fa-users"></i>
                     <div class="flex items-center justify-between">
                         <span class="mt-5 text-3xl font-bold text-white dark:text-white">{{ $totalPengguna }}</span>
                     </div>
@@ -73,8 +80,8 @@
                     <a href="{{ route('admin.data-petugas') }}">
                         <span class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">Data
                             Petugas</span>
-                        </a>
-                        <i class="fa-solid fa-user-tie"></i>
+                    </a>
+                    <i class="fa-solid fa-user-tie"></i>
                     <div class="flex items-center justify-between">
                         <span class="mt-5 text-3xl font-bold text-white dark:text-white">{{ $totalPetugas }}</span>
                     </div>
@@ -124,8 +131,18 @@
                     </tbody>
                 </table>
             </div>
-
         </main>
+    </div>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+
+        // Ketika tombol hamburger diklik, toggle sidebar
+        hamburgerBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full'); // Toggle sidebar hide/show
+        });
+    </script>
+
 </body>
 
 </html>
