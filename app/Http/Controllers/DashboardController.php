@@ -32,6 +32,8 @@ class DashboardController extends Controller
                 'totalJadwal' => JadwalMaskapai::count(),
                 'totalPengguna' => User::where('role', 'penumpang')->count(),
                 'totalPetugas' => User::where('role', 'petugas')->count(),
+                'totalPemesanan' => OrderDetail::count(),
+                'totalPendapatan' => OrderDetail::sum('total_harga'),
                 'orderDetails' => $orderDetails,
             ]);
         }
@@ -49,7 +51,7 @@ class DashboardController extends Controller
                 'ordertiket.jadwalMaskapai.rute.maskapai',
                 'ordertiket.users'
             ])->orderBy('created_at', 'desc')
-            ->paginate(5, ['*'], 'history_page'); 
+                ->paginate(5, ['*'], 'history_page');
 
             return view('petugas.dashboard', [
                 'jadwal' => $jadwal,
