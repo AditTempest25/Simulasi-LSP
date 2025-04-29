@@ -16,8 +16,9 @@
                             class="px-3 py-2 text-sm font-medium text-white
                             {{ request()->routeIs('myticket') ? 'rounded-md bg-gray-900' : 'hover:rounded-md hover:bg-gray-900' }}"
                             aria-current="page">My Ticket</a>
-                        {{-- <a href="#" class="px-3 py-2 text-sm font-medium text-white"
-                            aria-current="page">History</a> --}}
+                        <a href="{{ route('history') }}" class="px-3 py-2 text-sm font-medium text-white
+                        {{ request()->routeIs('history') ? 'rounded-md bg-gray-900' : 'hover:rounded-md hover:bg-gray-900' }}"
+                            aria-current="page">History Pemesanan</a>
                     </div>
                 </div>
             </div>

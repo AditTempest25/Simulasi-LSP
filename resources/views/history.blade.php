@@ -20,49 +20,49 @@
     <div class="bg-white flex-grow">
         <x-navbar-penumpang></x-navbar-penumpang>
 
-        <div class="container mx-auto py-10">
-            <h1 class="text-3xl font-bold text-center mb-5">My Ticket</h1>
+        <div class="container mx-auto py-8">
+            <h1 class="text-3xl font-bold mb-6">Riwayat Pemesanan Tiket</h1>
 
             @if ($tickets->isEmpty())
-                <p class="text-center text-gray-500">Belum ada tiket yang dipesan.</p>
+                <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4">
+                    <p>Anda belum memiliki tiket yang sudah di-approve.</p>
+                </div>
             @else
                 <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border border-gray-200">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="py-2 px-4 border">No Struk</th>
-                                <th class="py-2 px-4 border">Maskapai</th>
-                                <th class="py-2 px-4 border">Rute</th>
-                                <th class="py-2 px-4 border">Jumlah Tiket</th>
-                                <th class="py-2 px-4 border">Tanggal Transaksi</th>
-                                <th class="py-2 px-4 border">Status</th>
+                    <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                        <thead class="bg-gray-800 text-white">
+                            <tr>
+                                <th class="py-3 px-4 text-center">No. Tiket</th>
+                                <th class="py-3 px-4 text-center">Nama Maskapai</th>
+                                <th class="py-3 px-4 text-center">Rute</th>
+                                <th class="py-3 px-4 text-center">Waktu</th>
+                                <th class="py-3 px-4 text-center">Jumlah</th>
+                                <th class="py-3 px-4 text-center">Total Harga</th>
+                                <th class="py-3 px-4 text-center">Tanggal</th>
+                                <th class="py-3 px-4 text-center">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-gray-700 text-center">
                             @foreach ($tickets as $ticket)
-                                <tr class="text-center">
-                                    <td class="py-2 px-4 border">{{ $ticket->no_struk }}</td>
-                                    <td class="py-2 px-4 border">
-                                        {{ $ticket->jadwalMaskapai?->rute?->maskapai?->nama_maskapai ?? 'nama maskapai ditemukan' }}
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    <td class="py-3 px-4">{{ $ticket->orderTiket->no_struk }}</td>
+                                    <td class="py-3 px-4">{{ $ticket->nama_maskapai }}</td>
+                                    <td class="py-3 px-4">
+                                        {{ $ticket->kota_asal }} → {{ $ticket->kota_tujuan }}
                                     </td>
-                                    <td class="py-2 px-4 border">
-                                        {{ $ticket->jadwalMaskapai?->rute?->kotaAsal?->nama_kota ?? 'kota asal tidak ditemukan' }}
-                                        Ke
-                                        {{ $ticket->jadwalMaskapai?->rute?->kotaTujuan?->nama_kota ?? 'kota tujuan tidak ditemukan' }}
+                                    <td class="py-3 px-4">
+                                        {{ $ticket->waktu_berangkat }} - {{ $ticket->waktu_tiba }}
                                     </td>
-                                    <td class="py-2 px-4 border">
-                                        {{ $ticket->total_tiket ?? 'total tiket tidak ditemukan' }}</td>
-                                    <td class="py-2 px-4 border">
-                                        {{ \Carbon\Carbon::parse($ticket->tanggal_transaksi) }}
+                                    <td class="py-3 px-4">{{ $ticket->total_tiket }} Tiket</td>
+                                    <td class="py-3 px-4">Rp {{ number_format($ticket->total_harga, 0, ',', '.') }}</td>
+                                    <td class="py-3 px-4">
+                                        {{ \Carbon\Carbon::parse($ticket->tanggal_transaksi)->format('d M Y') }}</td>
+                                    <td class="py-3 px-4">
+                                        <a href="{{ route('ticket-pdf', $ticket->id_order_detail) }}"
+                                            class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                            <i class="fas fa-file-pdf mr-2"></i> View PDF
+                                        </a>
                                     </td>
-                                    <td class="py-2 px-4 border">
-                                        <span
-                                            class="px-3 py-1 text-white rounded
-                                            {{ $ticket->status_verifikasi == 'verified' ? 'bg-green-500' : ($ticket->status_verifikasi == 'rejected' ? 'bg-red-500' : 'bg-yellow-500') }}">
-                                            {{ ucfirst($ticket->status_verifikasi) }}
-                                        </span>
-                                    </td>
-
                                 </tr>
                             @endforeach
                         </tbody>
@@ -70,8 +70,6 @@
                 </div>
             @endif
         </div>
-
-        {{-- <x-footer></x-footer> --}}
     </div>
 
     <script>

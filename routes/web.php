@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\History;
 use App\Http\Controllers\JadwalMaskapaiController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\UserController;
@@ -127,6 +128,10 @@ Route::middleware(['auth', 'role:penumpang'])->group(function () {
     Route::post('/order/store', [OrderTiketController::class, 'store'])->name('order.store');
 
     Route::get('/myticket', [OrderTiketController::class, 'myTicket'])->name('myticket');
+
+    Route::get('/history', [History::class, 'index'])->name('history');
+    Route::get('/pdf/{id}', [History::class, 'generatePdf'])->name('ticket-pdf');
+
 });
 
 
