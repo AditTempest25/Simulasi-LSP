@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,13 +17,28 @@ class UserController extends Controller
 
         $penumpang = $query->paginate(10)->appends($request->query());
 
-        return view('admin.data-pengguna', compact('penumpang'));
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.data-pengguna', compact('penumpang'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.data-pengguna', compact('penumpang'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 
     public function create()
     {
         $password = '123456789';
-        return view('admin.pengguna.create-pengguna', compact('password'));
+
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.pengguna.create-pengguna', compact('password'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.pengguna.create-pengguna', compact('password'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 
     public function store(Request $request)
@@ -50,13 +66,27 @@ class UserController extends Controller
             'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('admin.data-pengguna')->with('success', 'penumpang berhasil ditambahkan');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.data-pengguna')->with('success', 'penumpang berhasil ditambahkan');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.data-pengguna')->with('success', 'penumpang berhasil ditambahkan');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 
     public function edit($id)
     {
         $pengguna = User::findOrFail($id);
-        return view('admin.pengguna.edit-pengguna', compact('pengguna'));
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return view('admin.pengguna.edit-pengguna', compact('pengguna'));
+        } elseif ($user->role === 'petugas') {
+            return view('petugas.pengguna.edit-pengguna', compact('pengguna'));
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
     public function update(Request $request, $id)
     {
@@ -77,12 +107,26 @@ class UserController extends Controller
         $pengguna->alamat = $request->alamat;
         $pengguna->save();
 
-        return redirect()->route('admin.data-pengguna')->with('success', 'penumpang berhasil diupdate');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.data-pengguna')->with('success', 'penumpang berhasil diupdate.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.data-pengguna')->with('success', 'penumpang berhasil diupdate.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
     public function destroy($id)
     {
         $penumpang = User::findOrFail($id);
         $penumpang->delete();
-        return redirect()->route('admin.data-pengguna')->with('success', 'Penumpang berhasil dihapus');
+        $user = Auth::user();
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.data-pengguna')->with('success', 'Penumpang berhasil dihapus.');
+        } elseif ($user->role === 'petugas') {
+            return redirect()->route('petugas.data-pengguna')->with('success', 'Penumpang berhasil dihapus.');
+        } else {
+            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+        }
     }
 }

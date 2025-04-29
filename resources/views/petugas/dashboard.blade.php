@@ -77,6 +77,61 @@
                 <div class="mt-6">
                     {{ $jadwal->links() }}
                 </div>
+
+                <!-- Section History Pembelian -->
+                <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8 mt-8">
+                    <h2 class="text-3xl font-bold text-green-700 mb-6">History Pembelian Tiket</h2>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-left text-black">
+                            <thead class="text-xs uppercase bg-green-500 text-white text-center">
+                                <tr>
+                                    <th class="px-4 py-3">No</th>
+                                    <th class="px-4 py-3">Nama Penumpang</th>
+                                    <th class="px-4 py-3">Maskapai</th>
+                                    <th class="px-4 py-3">Rute</th>
+                                    <th class="px-4 py-3">Tanggal Pembelian</th>
+                                    <th class="px-4 py-3">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200 text-center">
+                                @forelse ($history as $index => $h)
+                                    <tr>
+                                        <td class="px-4 py-3">{{ $history->firstItem() + $index }}</td>
+                                        <td class="px-4 py-3">{{ $h->ordertiket->users->name }}</td>
+                                        <td class="px-4 py-3">
+                                            {{ $h->ordertiket->jadwalMaskapai->rute->maskapai->nama_maskapai }}</td>
+                                        <td class="px-4 py-3">
+                                            ({{ $h->ordertiket->jadwalMaskapai->rute->kotaAsal->nama_kota }} -
+                                            {{ $h->ordertiket->jadwalMaskapai->rute->kotaTujuan->nama_kota }})
+                                        </td>
+                                        <td class="px-4 py-3">{{ $h->created_at->format('d M Y') }}</td>
+                                        <td class="px-4 py-3">
+                                            @if ($h->status == 'verified')
+                                                <span class="text-green-600">✅ Sukses</span>
+                                            @elseif ($h->status == 'rejected')
+                                                <span class="text-red-600">❌ Batal</span>
+                                            @else
+                                                <span class="text-yellow-500">⏳ Pending</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="px-4 py-3 text-center">Belum ada history pembelian
+                                            tiket.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination History -->
+                    <div class="mt-6">
+                        {{ $history->links() }}
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

@@ -94,41 +94,44 @@
                 <h3 class="text-xl font-bold text-blue-800 mb-4">Pemesanan Terbaru</h3>
                 <table class="w-full text-left">
                     <thead>
-                        <tr class="bg-blue-700 text-white">
+                        <tr class="bg-blue-700 text-white text-center">
                             <th class="p-3">ID</th>
                             <th class="p-3">Nama</th>
+                            <th class="p-3">Maskapai</th>
                             <th class="p-3">Keberangkatan</th>
                             <th class="p-3">Tujuan</th>
+                            <th class="p-3">Tanggal Pergi</th>
                             <th class="p-3">Harga</th>
                             <th class="p-3">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b">
-                            <td class="p-3">12345</td>
-                            <td class="p-3">Budi Santoso</td>
-                            <td class="p-3">Jakarta</td>
-                            <td class="p-3">Surabaya</td>
-                            <td class="p-3">Rp 350.000</td>
-                            <td class="p-3 text-green-600">✅ Sukses</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="p-3">12346</td>
-                            <td class="p-3">Ayu Lestari</td>
-                            <td class="p-3">Bandung</td>
-                            <td class="p-3">Yogyakarta</td>
-                            <td class="p-3">Rp 270.000</td>
-                            <td class="p-3 text-red-600">❌ Batal</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3">12347</td>
-                            <td class="p-3">Rizky Pratama</td>
-                            <td class="p-3">Medan</td>
-                            <td class="p-3">Jakarta</td>
-                            <td class="p-3">Rp 550.000</td>
-                            <td class="p-3 text-green-600">✅ Sukses</td>
-                        </tr>
+                        @forelse ($orderDetails as $order)
+                            <tr class="border-b text-center">
+                                <td class="p-3">{{ $loop->iteration }}</td>
+                                <td class="p-3">{{ $order->name ?? '-' }}</td>
+                                <td class="p-3">{{ $order->nama_maskapai ?? '-' }}</td>
+                                <td class="p-3">{{ $order->kota_asal ?? '-' }}</td>
+                                <td class="p-3">{{ $order->kota_tujuan ?? '-' }}</td>
+                                <td class="p-3">{{ $order->ordertiket->jadwalmaskapai->rute->tanggal_pergi ?? '-' }}</td>
+                                <td class="p-3">Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
+                                <td class="p-3">
+                                    @if ($order->status == 'verified')
+                                        <span class="text-green-600">✅ Sukses</span>
+                                    @elseif ($order->status == 'rejected')
+                                        <span class="text-red-600">❌ Batal</span>
+                                    @else
+                                        <span class="text-yellow-500">⏳ Pending</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center p-3">Belum ada transaksi.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
+
                 </table>
             </div>
         </main>

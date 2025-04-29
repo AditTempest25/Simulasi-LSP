@@ -88,6 +88,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->as('admin.')->group(
 Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->as('petugas.')->group(function () {
     // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Penumpang
+    Route::get('/data-pengguna', [UserController::class, 'index'])->name('data-pengguna');
+    Route::get('/data-pengguna/create', [UserController::class, 'create'])->name('data-pengguna.create');
+    Route::post('/data-pengguna', [UserController::class, 'store'])->name('data-pengguna.store');
+    Route::get('/data-pengguna/{id}/edit', [UserController::class, 'edit'])->name('data-pengguna.edit');
+    Route::put('/data-pengguna/{id}', [UserController::class, 'update'])->name('data-pengguna.update');
+    Route::delete('/data-pengguna/{id}', [UserController::class, 'destroy'])->name('data-pengguna.destroy');
+
     // Maskapai
     Route::get('/maskapai', [MaskapaiController::class, 'index'])->name('maskapai');
     Route::get('/maskapai/create', [MaskapaiController::class, 'create'])->name('maskapai.create');
